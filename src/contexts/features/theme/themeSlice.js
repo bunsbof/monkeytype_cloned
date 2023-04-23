@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   themeValue: "#111111",
   textColor: "#EEEEEE",
-  mainBtnColor: "#444444",
+  mainBtnColor: "#ababab",
   errorTypeColor: "#DA3333",
+  menuColor: "#444444",
 };
 
 export const themeSlice = createSlice({
@@ -16,6 +17,7 @@ export const themeSlice = createSlice({
       state.textColor = action.payload;
       state.mainBtnColor = action.payload;
       state.errorTypeColor = action.payload;
+      state.menuColor = action.payload;
     },
   },
 });

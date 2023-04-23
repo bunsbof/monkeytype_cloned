@@ -5,9 +5,8 @@ import Home from "./pages/Home";
 
 function App() {
   const themeValue = useSelector((state) => state.theme.themeValue);
-  console.log(typeof themeValue);
   return (
-    <div style={{ backgroundColor: themeValue, width: "100%", height: "100%" }}>
+    <div style={{ backgroundColor: themeValue, width: "100%", height: "100%" }} className="flex flex-col">
       <Navbar />
       <Home />
       <Footer />

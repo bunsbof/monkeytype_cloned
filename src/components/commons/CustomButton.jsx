@@ -4,20 +4,28 @@ const CustomButton = ({
   type,
   title,
   color,
+  fullWidth,
   hoverColor,
+  bg,
   icon,
+  size,
   handleClick,
 }) => {
   return (
     <Button
-    //   disabled={disabled}
+      //   disabled={disabled}
       sx={{
+        // width: fullWidth ? "100%" : "fit-content",
         color,
-        fontSize: 16,
+        fontSize: size ?? 16,
         fontWeight: 600,
         textTransform: "capitalize",
+        background: bg ?? "",
+        borderRadius: "0%",
         "&:hover": {
-          color: hoverColor
+          color: hoverColor,
+          cursor: "pointer",
+          background: bg ?? "",
         },
       }}
       type={type === "submit" ? "submit" : "button"}

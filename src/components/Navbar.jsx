@@ -7,7 +7,6 @@ const Navbar = () => {
   const themeValue = useSelector((state) => state.theme.themeValue);
   const textColor = useSelector((state) => state.theme.textColor);
   const mainBtnColor = useSelector((state) => state.theme.mainBtnColor);
-  const errorTypeColor = useSelector((state) => state.theme.errorTypeColor);
 
   return (
     <nav style={{ backgroundColor: themeValue }}>
