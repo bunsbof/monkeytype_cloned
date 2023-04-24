@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from 'reselect';
 
 const initialState = {
   themeValue: "#111111",
@@ -21,6 +22,20 @@ export const themeSlice = createSlice({
     },
   },
 });
+
+
+export const themeSelector = createSelector(
+  state => state.theme.menuColor,
+  state => state.theme.themeValue,
+  state => state.theme.mainBtnColor,
+  state => state.theme.textColor,
+  (menuColor, themeColor, mainButton, textColor) => ({
+    menuColor,
+    themeColor,
+    mainButton,
+    textColor
+  })
+);
 
 export const { changeTheme } = themeSlice.actions;
 

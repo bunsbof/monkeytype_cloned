@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 function App() {
   const themeValue = useSelector((state) => state.theme.themeValue);
   return (
-    <div style={{ backgroundColor: themeValue, width: "100%", height: "100%" }} className="flex flex-col">
+    <div style={{ backgroundColor: themeValue, paddingTop: '32px', opacity: 1 }} className="max-w-1250px items-center grid gap-8 grid-flow-row auto-rows-auto p-8 transition duration-125 w-full z-50">
       <Navbar />
       <Home />
       <Footer />
