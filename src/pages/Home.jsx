@@ -28,7 +28,11 @@ const Home = () => {
   const textColor = useSelector((state) => state.theme.textColor);
 
   return (
-    <div id="middle" className="wide125" style={{ color: textColor, height: "100%" }}>
+    <div
+      id="middle"
+      className="wide125"
+      style={{ color: textColor, height: "100%" }}
+    >
       <div className="page pageTest active" style={{ opacity: 1 }}>
         <div id="testConfig">
           <FunctionMenu />
@@ -50,30 +54,26 @@ const Home = () => {
           <div
             id="wordsWrapper"
             translate="no"
-            // style="height: 114px; overflow: hidden;"
             style={{ height: "114px", overflow: "hidden" }}
           >
             <div
               id="paceCaret"
               className="hidden default"
-              // style="font-size: 1.5rem;"
               style={{ fontSize: "1.5rem" }}
             ></div>
             <div
               id="caret"
               className="default"
-              // style="font-size: 1.5rem; animation-name: caretFlashHard; opacity: 1; display: block; top: 3.6px; left: 5px;"
               style={{
                 fontSize: "1.5rem",
                 opacity: 1,
                 display: "block",
-                top: "3.6px",
+                top: "0.6px",
                 left: "5px",
               }}
             ></div>
             <div
               id="words"
-              // style="font-size: 1.5rem; transition: none 0s ease 0s; height: 152px; overflow: hidden; width: 100%; margin-left: unset;"
               style={{
                 fontSize: "1.5rem",
                 transition: "none 0s ease 0s",
@@ -93,7 +93,6 @@ const Home = () => {
                   {word.split("").map((char, index) => (
                     <span key={index}>{char}</span>
                   ))}
-                  {/* {index !== words.length - 1 && <span>&nbsp;</span>} */}
                 </div>
               ))}
             </div>

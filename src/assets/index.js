@@ -25,6 +25,7 @@ import { BsFillBellFill, BsFillTriangleFill } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { RiDoubleQuotesL } from "react-icons/ri";
 import { MdOutlineAutoFixHigh } from "react-icons/md";
+import { TbKeyboardShow } from "react-icons/tb";
 
 export {
   logo,
@@ -54,4 +55,5 @@ export {
   FaTools,
   FaHeart,
   FaSearch,
+  TbKeyboardShow,
 };

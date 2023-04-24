@@ -1,5 +1,4 @@
 import {
-  logo,
   FiUser,
   FaKeyboard,
   FaCrown,
@@ -8,6 +7,7 @@ import {
   FaCircleNotch,
   FaUserAlt,
   FaBell,
+  TbKeyboardShow,
   // FaRegUser,
 } from "../assets";
 // import { useSelector } from "react-redux";
@@ -21,8 +21,10 @@ const Navbar = () => {
 
   return (
     <div id="top" className="w-full">
-      <div className="logo cursor-pointer whitespace-nowrap">
-        <div className="icon"><img src={logo} alt="logo" /></div>
+      <div className="logo">
+        <div className="icon">
+          <TbKeyboardShow />
+        </div>
         <h1 className="text">
           <div className="top">watch magic</div>magictypes
         </h1>
@@ -89,7 +91,7 @@ const Navbar = () => {
             {/* <i className="fas fa-fw fa-spin fa-circle-notch"></i> */}
             <FaCircleNotch />
           </div>
-          <div className="user" style={{opacity: 1}}>
+          <div className="user" style={{ opacity: 1 }}>
             {/* <i className="fas fa-fw fa-user"></i> */}
             <FaUserAlt />
           </div>

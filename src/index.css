@@ -1337,7 +1337,7 @@ body {
 
 :root {
   --roundness: 0.5rem;
-  --font: "Roboto Mono", "Vazirmatn", sans-serif;
+  --font: "Fira Code", "Roboto Mono", "Vazirmatn";
   font-weight: 400;
   scroll-padding-top: 2rem;
 }
@@ -3278,7 +3278,7 @@ textarea:-webkit-autofill:hover {
   font-size: 2.3rem;
   grid-auto-flow: column;
   grid-template-areas: "logo menu";
-  line-height: 2.3rem;
+  line-height: 3.3rem;
   padding: 0 5px;
   z-index: 2;
 }
@@ -3304,12 +3304,13 @@ textarea:-webkit-autofill:hover {
 }
 
 #top .logo .icon svg path {
-  fill: var(--main-color);
+  /* fill: var(--main-color); */
+  color: var(--main-color);
   transition: 0.25s;
 }
 
 #top .logo .text {
-  font-family: Lexend Deca;
+  font-family: var(--font);
   font-size: 2rem;
   font-weight: unset;
   margin-block-end: unset;
