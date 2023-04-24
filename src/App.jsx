@@ -6,10 +6,17 @@ import Home from "./pages/Home";
 function App() {
   const themeValue = useSelector((state) => state.theme.themeValue);
   return (
-    <div style={{ backgroundColor: themeValue, paddingTop: '32px', opacity: 1 }} className="max-w-1250px items-center grid gap-8 grid-flow-row auto-rows-auto p-8 transition duration-125 w-full z-50">
-      <Navbar />
-      <Home />
-      <Footer />
+    <div id="app" className="wide125">
+      <div></div>
+      <div
+        id="centerContent"
+        className="wide125"
+        style={{ paddingTop: "32px", opacity: "1" }}
+      >
+        <Navbar />
+        <Home />
+        <Footer />
+      </div>
     </div>
   );
 }

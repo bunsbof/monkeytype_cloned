@@ -1,44 +1,100 @@
 import { useSelector } from "react-redux";
 
 const Footer = () => {
-  const themeValue = useSelector((state) => state.theme.themeValue);
+  // const themeValue = useSelector((state) => state.theme.themeValue);
   return (
-    <footer
-      className="bg-white rounded-lg shadow m-4 dark:bg-gray-800 absolute bottom-0 w-11/12"
-      style={{ backgroundColor: themeValue }}
-    >
-      <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2023{" "}
-          <a href="http://localhost:5173/" className="hover:underline">
-            MajestyType™
-          </a>
-          . All Rights Reserved.
-        </span>
-        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-          <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
-              Licensing
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Contact
-            </a>
-          </li>
-        </ul>
+    <div id="bottom" className="">
+      <div id="commandLineMobileButton">
+        <i className="fas fa-terminal"></i>
       </div>
-    </footer>
+      <div className="keyTips">
+        <key>tab</key> + <key>enter</key> - restart test
+        <key>esc</key> or <key>ctrl</key>+<key>shift</key>+<key>p</key> -
+        command line
+      </div>
+      <div className="leftright">
+        <div className="left">
+          <div tabIndex="0" className="textButton" id="contactPopupButton">
+            <i className="fas fa-fw fa-envelope"></i>
+            <div className="text">Contact</div>
+          </div>
+          <div tabIndex="0" id="supportMeButton" className="textButton">
+            <i className="fas fa-fw fa-donate"></i>
+            <div className="text">Support</div>
+          </div>
+          <a
+            href="https://github.com/monkeytypegame/monkeytype"
+            className="textButton"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fas fa-fw fa-code"></i>
+            <div className="text">GitHub</div>
+          </a>
+          <a
+            href="https://www.discord.gg/monkeytype"
+            className="textButton"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fab fa-fw fa-discord"></i>
+            <div className="text">Discord</div>
+          </a>
+          <a
+            href="https://twitter.com/monkeytypegame"
+            className="textButton"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fab fa-fw fa-twitter"></i>
+            <div className="text">Twitter</div>
+          </a>
+          <a
+            href="/./terms-of-service.html"
+            className="textButton"
+            target="_blank"
+          >
+            <i className="fas fa-fw fa-file-contract"></i>
+            <div className="text">Terms</div>
+          </a>
+          <a
+            href="/./security-policy.html"
+            className="textButton"
+            target="_blank"
+          >
+            <i className="fas fa-fw fa-shield-alt"></i>
+            <div className="text">Security</div>
+          </a>
+          <a
+            href="/./privacy-policy.html"
+            className="textButton"
+            target="_blank"
+          >
+            <i className="fas fa-fw fa-lock"></i>
+            <div className="text">Privacy</div>
+          </a>
+        </div>
+        <div className="right">
+          <div
+            className="current-theme textButton"
+            aria-label="Shift-click to toggle custom theme"
+            data-balloon-pos="left"
+          >
+            <i className="fas fa-fw fa-palette"></i>
+            <div className="text">serika dark</div>
+          </div>
+          <div id="versionGroup" className="">
+            <div className="version textButton">
+              <i className="fas fa-fw fa-code-branch"></i>
+              <div className="text">v1.17.5</div>
+            </div>
+            <key id="newVersionIndicator" className="hidden">
+              new
+            </key>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
