@@ -20,8 +20,22 @@ import {
   FaTools,
   FaHeart,
   FaSearch,
+  FaTerminal,
+  FaEnvelope,
+  FaDonate,
+  FaCode,
+  FaTwitter,
+  FaFileContract,
+  FaShieldAlt,
+  FaLock,
+  FaPalette,
+  FaCodeBranch,
 } from "react-icons/fa";
-import { BsFillBellFill, BsFillTriangleFill } from "react-icons/bs";
+import {
+  BsFillBellFill,
+  BsFillTriangleFill,
+  BsFillPersonVcardFill,
+} from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { RiDoubleQuotesL } from "react-icons/ri";
 import { MdOutlineAutoFixHigh } from "react-icons/md";
@@ -56,4 +70,15 @@ export {
   FaHeart,
   FaSearch,
   TbKeyboardShow,
+  FaTerminal,
+  FaEnvelope,
+  FaDonate,
+  FaCode,
+  BsFillPersonVcardFill,
+  FaTwitter,
+  FaFileContract,
+  FaShieldAlt,
+  FaLock,
+  FaPalette,
+  FaCodeBranch,
 };

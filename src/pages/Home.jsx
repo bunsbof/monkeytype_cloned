@@ -82,7 +82,7 @@ const Home = () => {
                 width: "100%",
               }}
             >
-              <div className="word active">
+              <div className="word">
                 <span>h</span>
                 <span>o</span>
                 <span>l</span>

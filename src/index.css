@@ -1528,7 +1528,7 @@ label.checkbox input:checked ~ .customTextCheckbox .check {
   max-width: unset;
 }
 
-key {
+kbd {
   background-color: var(--sub-color);
   border-radius: 0.1rem;
   color: var(--bg-color);
@@ -1898,7 +1898,7 @@ key {
   transition: 0.125s;
 }
 
-#bottom .keyTips key {
+#bottom .keyTips kbd {
   margin: 0 0.25rem;
 }
 
