@@ -25,6 +25,7 @@ const words = [
 
 function TypeSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
   const wordsRef = useRef(null);
   const beamRef = useRef(null);
@@ -33,19 +34,26 @@ function TypeSection() {
     inputRef.current.focus();
   };
 
-  const handleInput = () => {
-    const currentWord = words[activeIndex];
-    const inputValue = inputRef.current.value.trim();
-    if (inputValue === currentWord) {
-      setActiveIndex((prevIndex) => prevIndex + 1);
-      inputRef.current.value = "";
-      const wordsElements = document.querySelectorAll(".word");
-      wordsElements[activeIndex].classList.remove("active");
-      wordsElements[activeIndex + 1].classList.add("active");
+  const handleInput = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleInputKeyDown = (event) => {
+    // Prevent the user from typing spaces if they haven't typed anything yet
+    if (inputValue === "" && event.key === " ") {
+      event.preventDefault();
+    } else if (inputValue && event.key === " ") {
+      event.preventDefault();
+      setActiveIndex((index) => index + 1);
+      setInputValue("");
+      wordsRef.current.children[activeIndex].classList.remove("active");
+      wordsRef.current.children[activeIndex + 1].classList.add("active");
     }
   };
 
   useEffect(() => {
+    document.getElementById("wordsInput").focus();
+
     function handleClickOutside(event) {
       if (wordsRef.current && wordsRef.current.contains(event.target)) {
         if (beamRef.current.classList.contains("hidden")) {
@@ -62,13 +70,6 @@ function TypeSection() {
     };
   }, [wordsRef]);
 
-  useEffect(() => {
-    inputRef.current.addEventListener("input", handleInput);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    return () => inputRef.current.removeEventListener("input", handleInput);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
       <input
@@ -83,6 +84,8 @@ function TypeSection() {
         data-enable-grammarly="false"
         list="autocompleteOff"
         style={{ left: 0, top: "94px" }}
+        onKeyDown={handleInputKeyDown}
+        onChange={handleInput}
       />
 
       <div
