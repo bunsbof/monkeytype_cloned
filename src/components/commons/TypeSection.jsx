@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { memo } from "react";
+import { useStateContext } from "../../contexts/ContextProvider";
+import Word from "./Word";
 
 const words = [
   "take",
@@ -24,51 +26,14 @@ const words = [
 ];
 
 function TypeSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [inputValue, setInputValue] = useState("");
-  const inputRef = useRef(null);
-  const wordsRef = useRef(null);
-  const beamRef = useRef(null);
-
-  const handleWordWrapperFocus = () => {
-    inputRef.current.focus();
-  };
-
-  const handleInput = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleInputKeyDown = (event) => {
-    // Prevent the user from typing spaces if they haven't typed anything yet
-    if (inputValue === "" && event.key === " ") {
-      event.preventDefault();
-    } else if (inputValue && event.key === " ") {
-      event.preventDefault();
-      setActiveIndex((index) => index + 1);
-      setInputValue("");
-      wordsRef.current.children[activeIndex].classList.remove("active");
-      wordsRef.current.children[activeIndex + 1].classList.add("active");
-    }
-  };
-
-  useEffect(() => {
-    document.getElementById("wordsInput").focus();
-
-    function handleClickOutside(event) {
-      if (wordsRef.current && wordsRef.current.contains(event.target)) {
-        if (beamRef.current.classList.contains("hidden")) {
-          beamRef.current.classList.remove("hidden");
-        }
-      } else {
-        beamRef.current.classList.add("hidden");
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [wordsRef]);
+  const {
+    inputRef,
+    wordsRef,
+    beamRef,
+    handleInputKeyDown,
+    handleInput,
+    handleWordWrapperFocus,
+  } = useStateContext();
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
@@ -123,14 +88,7 @@ function TypeSection() {
           }}
         >
           {words.map((word, index) => (
-            <div
-              key={index}
-              className={`word ${index === activeIndex ? "active" : ""}`}
-            >
-              {word.split("").map((char, index) => (
-                <span key={index}>{char}</span>
-              ))}
-            </div>
+            <Word key={index} word={word} wordActiveIndex={index} />
           ))}
         </div>
       </div>
