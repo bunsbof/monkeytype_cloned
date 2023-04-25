@@ -11,6 +11,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [onActiveWord, setOnActiveWord] = useState(0);
   const wordsRef = useRef(null);
   const inputRef = useRef(null);
   const beamRef = useRef(null);
@@ -22,20 +23,6 @@ export const ContextProvider = ({ children }) => {
     setInputValue(event.target.value);
   };
 
-  // const handleInputKeyDown = (event) => {
-  //   // Prevent the user from typing spaces if they haven't typed anything yet
-  //   if (inputValue === "" && event.key === " ") {
-  //     event.preventDefault();
-  //   } else if (inputValue && event.key === " ") {
-  //     event.preventDefault();
-  //     const nextIndex = activeIndex + 1;
-  //     setActiveIndex(nextIndex);
-  //     setInputValue("");
-  //     wordsRef.current.children[nextIndex - 1].classList.remove("active");
-  //     wordsRef.current.children[nextIndex].classList.add("active");
-  //   }
-  // };
-
   const handleInputKeyDown = (event) => {
     if (inputValue === "" && event.key === " ") {
       event.preventDefault();
@@ -43,31 +30,9 @@ export const ContextProvider = ({ children }) => {
       event.preventDefault();
       setActiveIndex((index) => index + 1);
       setInputValue("");
+      setOnActiveWord(0);
     }
   };
-
-  // const handleInputKeyDown = (event) => {
-  //   console.log(activeIndex); // log the current active index before updating
-  //   if (inputValue === "" && event.key === " ") {
-  //     event.preventDefault();
-  //   } else if (inputValue && event.key === " ") {
-  //     event.preventDefault();
-  //     setActiveIndex((index) => index + 1);
-  //     setInputValue("");
-  //   }
-  //   console.log(activeIndex); // log the updated active index
-  // };
-
-  // const handleInputKeyDown = (event) => {
-  //   if (inputValue === "" && event.key === " ") {
-  //     event.preventDefault();
-  //   } else if (inputValue && event.key === " ") {
-  //     event.preventDefault();
-  //     setActiveIndex((index) => index + 1);
-  //     setInputValue("");
-  //     // console.log(activeIndex);
-  //   }
-  // };
 
   useEffect(() => {
     if (wordsRef.current && wordsRef.current.children[activeIndex]) {
@@ -97,24 +62,21 @@ export const ContextProvider = ({ children }) => {
     };
   }, [wordsRef]);
 
-  useEffect(() => {
-    console.log(inputValue);
-  }, [inputValue]);
-
   return (
     <StateContext.Provider
       value={{
         inputValue,
-        wordsRef,
+        onActiveWord,
         activeIndex,
+        wordsRef,
         inputRef,
         beamRef,
         setInputValue,
         setActiveIndex,
         handleWordWrapperFocus,
-        // handleInputEvent,
         handleInputKeyDown,
         handleInput,
+        setOnActiveWord,
       }}
     >
       {children}

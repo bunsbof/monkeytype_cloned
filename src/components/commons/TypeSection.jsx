@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Word from "./Word";
 
@@ -31,13 +31,10 @@ function TypeSection() {
     inputValue,
     wordsRef,
     beamRef,
-    // handleInputEvent,
     handleInputKeyDown,
     handleInput,
     handleWordWrapperFocus,
   } = useStateContext();
-
-  if (inputValue) console.log(inputValue);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
