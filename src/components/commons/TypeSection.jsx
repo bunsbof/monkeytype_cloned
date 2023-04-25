@@ -28,16 +28,21 @@ const words = [
 function TypeSection() {
   const {
     inputRef,
+    inputValue,
     wordsRef,
     beamRef,
+    // handleInputEvent,
     handleInputKeyDown,
     handleInput,
     handleWordWrapperFocus,
   } = useStateContext();
 
+  if (inputValue) console.log(inputValue);
+
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
       <input
+        value={inputValue}
         ref={inputRef}
         id="wordsInput"
         tabIndex="0"
