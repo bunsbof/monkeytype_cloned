@@ -19,8 +19,30 @@ export const ContextProvider = ({ children }) => {
   const handleWordWrapperFocus = () => {
     inputRef.current.focus();
   };
+  // const handleInput = (event) => {
+  //   setInputValue(event.target.value);
+  // };
+
   const handleInput = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    setInputValue(value);
+
+    if (value.endsWith(" ")) {
+      // The user has typed a complete word, so check if it matches the active word
+      const words = wordsRef.current.children;
+      const activeWord = words[activeIndex];
+      const activeWordText = activeWord.textContent.trim();
+      const isCorrect = value.trim() === activeWordText;
+
+      // Update the active word's class based on whether it was typed correctly or not
+      activeWord.className = `word ${isCorrect ? "correct" : "incorrect"}`;
+
+      // Move on to the next word if this one was typed correctly
+      if (isCorrect) {
+        setActiveIndex((index) => index + 1);
+        setInputValue("");
+      }
+    }
   };
 
   const handleInputKeyDown = (event) => {

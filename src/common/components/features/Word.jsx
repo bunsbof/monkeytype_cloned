@@ -1,4 +1,4 @@
-import { useStateContext } from "../../contexts/ContextProvider";
+import { useStateContext } from "../../../contexts/ContextProvider";
 
 const Word = ({ word, wordActiveIndex }) => {
   const { activeIndex, onActiveWord, setOnActiveWord } = useStateContext();

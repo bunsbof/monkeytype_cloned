@@ -11,7 +11,7 @@ import {
   FaLock,
   FaPalette,
   FaCodeBranch,
-} from "../assets";
+} from "../../assets";
 
 const Footer = () => {
   // const themeValue = useSelector((state) => state.theme.themeValue);

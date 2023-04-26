@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
+
+import { Navbar, Footer } from "./common/components";
+import { HomePage } from "./pages";
 
 function App() {
   const themeValue = useSelector((state) => state.theme.themeValue);
@@ -14,7 +14,7 @@ function App() {
         style={{ paddingTop: "32px", opacity: "1" }}
       >
         <Navbar />
-        <Home />
+        <HomePage />
         <Footer />
       </div>
     </div>

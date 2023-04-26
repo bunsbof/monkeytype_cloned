@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { useStateContext } from "../../contexts/ContextProvider";
+import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 
 const words = [

@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import FunctionMenu from "../components/commons/FunctionMenu";
-import TypeSection from "../components/commons/TypeSection";
+import { FunctionMenu, TypeSection } from "../common/components";
 
 const Home = () => {
   const textColor = useSelector((state) => state.theme.textColor);

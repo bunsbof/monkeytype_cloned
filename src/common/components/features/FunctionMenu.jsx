@@ -11,7 +11,7 @@ import {
   FaTools,
   FaHeart,
   FaSearch,
-} from "../../assets";
+} from "../../../assets";
 // import { themeSelector } from "../../contexts/features/theme/themeSlice";
 
 const FunctionMenu = () => {
