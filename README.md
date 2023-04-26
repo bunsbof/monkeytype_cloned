@@ -2,8 +2,7 @@
 <br />
 
 # About
-
-I just admired about the monkey type website and wanted to make it my own. This is just for fun and seeking knowledge. I'll not compare my app to the original website which is(https://monkeytype.com)
+I recently came across the Monkey Type website and found it quite impressive. I am interested in creating something similar for my own personal use, as a means of gaining knowledge and for recreational purposes. It is important to note that I have no intention of comparing my application to the original website which is(https://monkeytype.com)
 
 # Features
 
@@ -11,8 +10,6 @@ I just admired about the monkey type website and wanted to make it my own. This 
 - live errors, wpm, and accuracy displays
 
 # Todo List
-
-On the [Monkeytype Discord server](https://www.discord.gg/monkeytype), we added a Discord bot to auto-assign optional roles based on typing performance and challenge completion. You can find its code over at https://github.com/monkeytypegame/monkeytype-bot.
 
 - app structure
 - live test, wpm, and accuracy displays
