@@ -8,7 +8,7 @@ import {
   FaUserAlt,
   FaBell,
   TbKeyboardShow,
-  // FaRegUser,
+  FaRegUser,
 } from "../../assets";
 // import { useSelector } from "react-redux";
 
@@ -26,7 +26,7 @@ const Navbar = () => {
           <TbKeyboardShow />
         </div>
         <h1 className="text">
-          <div className="top">watch magic</div>magictypes
+          <div className="top">monkey see</div>monkeytype
         </h1>
       </div>
       <div id="menu">
@@ -124,7 +124,7 @@ const Navbar = () => {
         >
           <div className="icon">
             {/* <i className="far fa-fw fa-user"></i> */}
-            <FiUser />
+            <FaRegUser />
           </div>
         </div>
       </div>

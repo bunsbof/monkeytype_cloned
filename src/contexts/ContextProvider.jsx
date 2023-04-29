@@ -11,7 +11,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [onActiveWord, setOnActiveWord] = useState(0);
+  // const [onActiveWord, setOnActiveWord] = useState(0);
   const wordsRef = useRef(null);
   const inputRef = useRef(null);
   const beamRef = useRef(null);
@@ -30,10 +30,8 @@ export const ContextProvider = ({ children }) => {
       event.preventDefault();
     } else if (inputValue && event.key === " ") {
       event.preventDefault();
-      console.log(inputValue);
       setActiveIndex((index) => index + 1);
       setInputValue("");
-      setOnActiveWord(0);
     }
   };
 
@@ -69,7 +67,7 @@ export const ContextProvider = ({ children }) => {
     <StateContext.Provider
       value={{
         inputValue,
-        onActiveWord,
+        // onActiveWord,
         activeIndex,
         wordsRef,
         inputRef,
@@ -79,7 +77,7 @@ export const ContextProvider = ({ children }) => {
         handleWordWrapperFocus,
         handleInputKeyDown,
         handleInput,
-        setOnActiveWord,
+        // setOnActiveWord,
       }}
     >
       {children}

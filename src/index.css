@@ -1098,11 +1098,11 @@ body {
   width: 0.1em;
 }
 
-#caret.carrot,
+/* #caret.carrot,
 #paceCaret.carrot {
   background-image: url(../images/carrot.png);
   width: 0.25em;
-}
+} */
 
 #caret.banana,
 #caret.carrot,
@@ -1114,11 +1114,11 @@ body {
   background-size: contain;
 }
 
-#caret.banana,
+/* #caret.banana,
 #paceCaret.banana {
   background-image: url(../images/banana.png);
   width: 1em;
-}
+} */
 
 #caret.block,
 #caret.outline,
