@@ -226,7 +226,7 @@ body {
 .page404 .content .image {
   align-self: center;
   aspect-ratio: 300/199;
-  background-image: url(../images/monkeymeme.jpg);
+  /* background-image: url(../images/monkeymeme.jpg); */
   background-size: contain;
   border-radius: var(--roundness);
   width: 100%;
@@ -3105,7 +3105,7 @@ textarea:-webkit-autofill:hover {
   width: 308px;
 }
 
-#monkey .up {
+/* #monkey .up {
   background-image: url(../images/monkey/m3.png);
 }
 
@@ -3135,7 +3135,7 @@ textarea:-webkit-autofill:hover {
 
 #monkey .fast .both {
   background-image: url(../images/monkey/m4_fast.png);
-}
+} */
 
 #menu {
   color: var(--sub-color);

@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 
@@ -73,8 +73,8 @@ function TypeSection() {
             fontSize: "1.5rem",
             opacity: 1,
             display: "block",
-            top: "0.6px",
-            left: "5px",
+            // top: "0.6px",
+            // left: "5px",
           }}
         ></div>
         <div
