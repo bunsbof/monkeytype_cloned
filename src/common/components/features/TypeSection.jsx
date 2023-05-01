@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
+import Beam from "./Beam";
 
 const words = [
   "take",
@@ -30,7 +31,6 @@ function TypeSection() {
     inputRef,
     inputValue,
     wordsRef,
-    beamRef,
     handleInputKeyDown,
     handleInput,
     handleWordWrapperFocus,
@@ -60,23 +60,7 @@ function TypeSection() {
         translate="no"
         style={{ height: "114px", overflow: "hidden" }}
       >
-        <div
-          id="paceCaret"
-          className="hidden default"
-          style={{ fontSize: "1.5rem" }}
-        ></div>
-        <div
-          id="caret"
-          ref={beamRef}
-          className="default"
-          style={{
-            fontSize: "1.5rem",
-            opacity: 1,
-            display: "block",
-            // top: "0.6px",
-            // left: "5px",
-          }}
-        ></div>
+        <Beam />
         <div
           id="words"
           ref={wordsRef}
