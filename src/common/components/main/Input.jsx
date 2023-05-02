@@ -31,6 +31,8 @@ const Input = () => {
         if (hasIncorrectSpan || hasSpanWithNoClass) {
           previousWord.classList.add("error");
           //   console.log(hasIncorrectSpan, " ", hasSpanWithNoClass);
+        } else {
+            previousWord.classList.remove("error");
         }
         if (previousState.length !== previousWordText.length) {
           previousWord.classList.add("error");
