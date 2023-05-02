@@ -11,13 +11,14 @@ I recently came across the Monkey Type website and found it quite impressive. I 
 
 # Todo List
 
-- app structure
+- app structure     ✔
 - live test, wpm, and accuracy displays
 - request random words
 - functions menu functionalities
-- smooth caret
+- smooth caret      ✔
 - change theme settings
 - add back end functionality
 - account system integration
 - quotes
-- font family, colors, 
+- font family, colors,      ✔
+- add states management support (if not too lazy or too OCD for other tasks)
