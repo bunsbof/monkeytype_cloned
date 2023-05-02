@@ -22,3 +22,4 @@ I recently came across the Monkey Type website and found it quite impressive. I 
 - quotes
 - font family, colors,      ✔
 - add states management support (if not too lazy or too OCD for other tasks)
+- more caret styles
