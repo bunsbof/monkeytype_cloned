@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 import Beam from "./Beam";
+import Input from "./Input";
 
 const words = [
   "take",
@@ -27,33 +28,11 @@ const words = [
 ];
 
 function TypeSection() {
-  const {
-    inputRef,
-    inputValue,
-    wordsRef,
-    handleInputKeyDown,
-    handleInput,
-    handleWordWrapperFocus,
-  } = useStateContext();
+  const { wordsRef, handleWordWrapperFocus } = useStateContext();
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
-      <input
-        value={inputValue}
-        ref={inputRef}
-        id="wordsInput"
-        tabIndex="0"
-        autoComplete="off"
-        autoCapitalize="off"
-        autoCorrect="off"
-        data-gramm="false"
-        data-gramm_editor="false"
-        data-enable-grammarly="false"
-        list="autocompleteOff"
-        style={{ left: 0, top: "94px" }}
-        onKeyDown={handleInputKeyDown}
-        onChange={handleInput}
-      />
+      <Input />
 
       <div
         id="wordsWrapper"

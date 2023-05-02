@@ -8,7 +8,11 @@ const Beam = () => {
   const [caretWidth, setCaretWidth] = useState(0);
   const [findActiveWord, setFindActiveWord] = useState(null);
   const animationRef = useRef(null);
-  const [animationObj, setAnimationObj] = useState({});
+  const [animationObj, setAnimationObj] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
 
   useEffect(() => {
     if (beamRef.current) {

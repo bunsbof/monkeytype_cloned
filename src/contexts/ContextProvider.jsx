@@ -10,6 +10,8 @@ const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
+  const [compareValue, setcompareValue] = useState("");
+  const [previousState, setPreviousState] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLanguageRightToLeft, setIsLanguageRightToLeft] = useState(false);
   const wordsRef = useRef(null);
@@ -24,8 +26,6 @@ export const ContextProvider = ({ children }) => {
   const handleInput = (event) => {
     const value = event.target.value;
     setInputValue(value);
-    // console.log(value.trim().split(" ").length - 1);
-    // setOnActiveWord(value.trim().split(" ").length - 1);
   };
 
   const handleInputKeyDown = (event) => {
@@ -33,25 +33,11 @@ export const ContextProvider = ({ children }) => {
       event.preventDefault();
     } else if (inputValue && event.key === " ") {
       event.preventDefault();
+      setcompareValue(inputValue);
       setActiveIndex((index) => index + 1);
       setInputValue("");
     }
   };
-
-  // useEffect(() => {
-  //   const activeElement = document.querySelector(".word.active");
-  //   const activeSpan = activeElement.querySelectorAll("span")[onActiveWord];
-  //   if (activeSpan && beamRef.current) {
-  //     const spanRect = activeSpan.getBoundingClientRect();
-  //     const beamRect = beamRef.current.getBoundingClientRect();
-  //     const newTop = `${spanRect.top - beamRect.height / 2}px`;
-  //     const newLeft = `${
-  //       spanRect.left + spanRect.width / 2 - beamRect.width / 2
-  //     }px`;
-  //     beamRef.current.style.top = newTop;
-  //     beamRef.current.style.left = newLeft;
-  //   }
-  // }, [inputValue, onActiveWord]);
 
   useEffect(() => {
     if (wordsRef.current && wordsRef.current.children[activeIndex]) {
@@ -87,10 +73,14 @@ export const ContextProvider = ({ children }) => {
         inputValue,
         activeIndex,
         isLanguageRightToLeft,
+        compareValue,
+        previousState,
         wordsRef,
         inputRef,
         beamRef,
         charRef,
+        setPreviousState,
+        setcompareValue,
         setIsLanguageRightToLeft,
         setInputValue,
         setActiveIndex,
