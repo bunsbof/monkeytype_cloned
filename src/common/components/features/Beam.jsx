@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import * as Misc from "../../../utils/misc";
 
@@ -7,6 +7,7 @@ const Beam = () => {
     useStateContext();
   const [caretWidth, setCaretWidth] = useState(0);
   const [findActiveWord, setFindActiveWord] = useState(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     if (beamRef.current) {
@@ -100,8 +101,10 @@ const Beam = () => {
     (currentLetter ? currentLetter.offsetWidth : previousLetter.offsetWidth) +
     "px";
 
-    let smoothlinescroll = document.querySelector("#words .smoothScroller")?.offsetHeight;
-    if (smoothlinescroll === undefined) smoothlinescroll = 0;
+  let smoothlinescroll = document.querySelector(
+    "#words .smoothScroller"
+  )?.offsetHeight;
+  if (smoothlinescroll === undefined) smoothlinescroll = 0;
 
   // const animation: { top: number; left: number; width: string } = {
   //   top: newTop - smoothlinescroll,
@@ -109,15 +112,39 @@ const Beam = () => {
   //   width: newWidth,
   // };
 
-    const animation = {
-      top: newTop - smoothlinescroll,
-      left: newLeft,
-      width: newWidth,
-    };
+  const animation = {
+    top: newTop - smoothlinescroll,
+    left: newLeft,
+    width: newWidth,
+  };
 
-    const handleAnimationEnd = () => {
-      /* handle animation end */
-    };
+  const handleAnimationEnd = () => {
+    /* handle animation end */
+  };
+
+  // cancel any ongoing animation before starting a new one
+  cancelAnimationFrame(animationRef.current);
+
+  animationRef.current = requestAnimationFrame(() => {
+    const caret = document.querySelector("#caret");
+
+    if (caret) {
+      // apply the animation to the caret
+      caret
+        .animate(
+          {
+            top: `${animation.top}px`,
+            left: `${animation.left}px`,
+            width: animation.width,
+          },
+          {
+            duration: 100,
+            fill: "forwards",
+          }
+        )
+        .addEventListener("finish", handleAnimationEnd);
+    }
+  });
 
   return (
     <>
@@ -131,12 +158,18 @@ const Beam = () => {
         ref={beamRef}
         className="default"
         style={{
+          animationName: "beamAnimation",
+          animationDuration: "0.3s",
+          animationFillMode: "forwards",
           fontSize: "1.5rem",
           opacity: 1,
           display: "block",
-        //   top: "0.6px",
-        //   left: "5px",
+          top: `${animation.top}px`,
+          left: `${animation.left}px`,
+          width: animation.width,
+          transition: "none",
         }}
+        onAnimationEnd={handleAnimationEnd}
       ></div>
     </>
   );

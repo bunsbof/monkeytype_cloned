@@ -209,6 +209,20 @@ body {
   padding: 0;
 }
 
+@keyframes beamAnimation {
+  from {
+    top: 50%;
+    left: 0;
+    width: 0;
+  }
+
+  to {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+  }
+}
+
 .page404 {
   align-content: center;
   display: grid;
