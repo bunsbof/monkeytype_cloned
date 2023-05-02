@@ -74,7 +74,7 @@ const Beam = () => {
 
   const newTop =
     letterPosTop -
-    1.5 *
+    4 *
       Misc.convertRemToPixel(1) *
       0.1; /* You'll need to define Config and Misc */
   let newLeft = letterPosLeft - caretWidth / 2;
@@ -98,7 +98,8 @@ const Beam = () => {
     }
     */
   const newWidth =
-    (currentLetter ? currentLetter.offsetWidth : previousLetter.offsetWidth) +
+    (currentLetter ? currentLetter.offsetWidth : previousLetter.offsetWidth) *
+      0.2 +
     "px";
 
   let smoothlinescroll = document.querySelector(
