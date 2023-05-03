@@ -25,3 +25,4 @@ I recently came across the Monkey Type website and found it quite impressive. I 
 - more caret styles
 - #word move down when caret comes to a certain point
 - inputValue can go back to fix the previous word (error only)       ✔
+- backspace things       ✔
