@@ -26,4 +26,7 @@ I recently came across the Monkey Type website and found it quite impressive. I 
 - #word move down when caret comes to a certain point
 - inputValue can go back to fix the previous word (error only)       ✔
 - backspace things       ✔
-- backspace works but if compared value longer than previous active word will break the UI
+- hash approach
+- more languages (if not too lazy)
+- restart test
+- menu modal
