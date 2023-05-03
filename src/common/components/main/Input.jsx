@@ -10,18 +10,19 @@ const Input = () => {
     wordsRef,
     previousState,
     compareValue,
-    setPreviousState,
   } = useStateContext();
-
-  const prevInputValue = useRef(inputValue);
 
   useEffect(() => {
     const handlePreviousDetect = () => {
       const activeWord = document.querySelector(".word.active");
       const previousWord = activeWord && activeWord.previousElementSibling;
       const previousWordText = previousWord?.textContent;
-      setPreviousState(previousWordText);
-      if (previousState && previousState !== inputValue && previousWord) {
+
+      if (
+        previousWordText &&
+        compareValue &&
+        previousWordText !== compareValue
+      ) {
         const hasIncorrectSpan = previousWord.querySelector("span.incorrect");
         const spans = previousWord.querySelectorAll("span");
         const hasSpanWithNoClass = Array.from(spans).some(
@@ -31,14 +32,13 @@ const Input = () => {
         if (hasIncorrectSpan || hasSpanWithNoClass) {
           previousWord.classList.add("error");
           //   console.log(hasIncorrectSpan, " ", hasSpanWithNoClass);
-        } else {
-            previousWord.classList.remove("error");
+        } else if (!hasIncorrectSpan || !hasSpanWithNoClass) {
+          previousWord.classList.remove("error");
         }
-        if (previousState.length !== previousWordText.length) {
+        if (previousWordText.length !== previousWordText.length) {
           previousWord.classList.add("error");
         }
       }
-      prevInputValue.current = inputValue;
     };
     handlePreviousDetect();
 
@@ -48,7 +48,7 @@ const Input = () => {
     return () => {
       observer.disconnect(); // clean up observer
     };
-  }, [compareValue, previousState]);
+  }, [compareValue]);
 
   return (
     <input

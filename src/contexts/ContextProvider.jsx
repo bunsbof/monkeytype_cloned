@@ -11,7 +11,6 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
   const [compareValue, setcompareValue] = useState("");
-  const [previousState, setPreviousState] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLanguageRightToLeft, setIsLanguageRightToLeft] = useState(false);
   const wordsRef = useRef(null);
@@ -74,12 +73,10 @@ export const ContextProvider = ({ children }) => {
         activeIndex,
         isLanguageRightToLeft,
         compareValue,
-        previousState,
         wordsRef,
         inputRef,
         beamRef,
         charRef,
-        setPreviousState,
         setcompareValue,
         setIsLanguageRightToLeft,
         setInputValue,
