@@ -36,22 +36,22 @@ export const ContextProvider = ({ children }) => {
       setActiveIndex((index) => index + 1);
       setInputValue("");
     } else if (event.key === "Backspace") {
-      const wordsContainer = document.querySelector("#words");
-      const wordsList = Array.from(wordsContainer.querySelectorAll(".word"));
-      const activeWord = wordsList[activeIndex];
+      const wordsList = Array.from(document.querySelectorAll("#words .word"));
+      const previousWordIndex = activeIndex - 1;
 
-      const previousWord = wordsList[activeIndex <= 0 ? 0 : activeIndex - 1];
-      if (
-        inputValue === "" &&
-        compareValue &&
-        previousWord.classList.contains("error")
-      ) {
-        activeWord.classList.remove("error");
-        setActiveIndex((ind) => {
-          if (ind <= 0) return 0;
-          else return --ind;
-        });
-        setInputValue(compareValue);
+      if (previousWordIndex >= 0) {
+        const previousWord = wordsList[previousWordIndex];
+        if (compareValue.length > previousWord.textContent.length) return;
+        if (
+          inputValue === "" &&
+          compareValue &&
+          previousWord.matches(".error")
+        ) {
+          const activeWord = wordsList[activeIndex];
+          activeWord.classList.remove("error");
+          setActiveIndex((ind) => Math.max(0, ind - 1));
+          setInputValue(compareValue);
+        }
       }
     }
   };
