@@ -8,16 +8,28 @@ const Input = () => {
     handleInput,
     handleInputKeyDown,
     wordsRef,
-    previousState,
     compareValue,
   } = useStateContext();
 
   useEffect(() => {
-    const handlePreviousDetect = () => {
-      const activeWord = document.querySelector(".word.active");
+    const handleInput = () => {
+      const activeWord = document.querySelector("#words .active");
+      const activeWordText = activeWord && activeWord.textContent;
       const previousWord = activeWord && activeWord.previousElementSibling;
       const previousWordText = previousWord?.textContent;
 
+      // Handle extra input
+      if (
+        inputValue &&
+        activeWordText &&
+        inputValue !== activeWordText &&
+        inputValue.length > activeWordText.length &&
+        !activeWord.classList.contains("error")
+      ) {
+        activeWord.classList.add("error");
+      }
+
+      // Handle incorrect input
       if (
         previousWordText &&
         compareValue &&
@@ -29,26 +41,27 @@ const Input = () => {
           (span) => !span.classList.length
         );
 
-        if (hasIncorrectSpan || hasSpanWithNoClass) {
+        if (
+          hasIncorrectSpan ||
+          hasSpanWithNoClass ||
+          compareValue.length > previousWordText.length
+        ) {
           previousWord.classList.add("error");
-          //   console.log(hasIncorrectSpan, " ", hasSpanWithNoClass);
-        } else if (!hasIncorrectSpan || !hasSpanWithNoClass) {
+        } else {
           previousWord.classList.remove("error");
-        }
-        if (previousWordText.length !== previousWordText.length) {
-          previousWord.classList.add("error");
         }
       }
     };
-    handlePreviousDetect();
 
-    const observer = new MutationObserver(handlePreviousDetect);
+    handleInput();
+
+    const observer = new MutationObserver(handleInput);
     observer.observe(wordsRef.current, { attributes: true, childList: true });
 
     return () => {
       observer.disconnect(); // clean up observer
     };
-  }, [compareValue]);
+  }, [inputValue, compareValue]);
 
   return (
     <input

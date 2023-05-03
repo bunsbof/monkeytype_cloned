@@ -36,6 +36,9 @@ export const ContextProvider = ({ children }) => {
       setActiveIndex((index) => index + 1);
       setInputValue("");
     }
+    if (event.key === "Backspace" && inputValue === "" && compareValue) {
+      console.log("Backspace key pressed");
+    }
   };
 
   useEffect(() => {
