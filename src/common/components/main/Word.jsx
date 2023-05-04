@@ -2,7 +2,7 @@ import { memo, useEffect, useRef, useState } from "react";
 
 import { useStateContext } from "../../../contexts/ContextProvider";
 
-const Letter = ({ char, isActive, letterIndex }) => {
+const Letter = memo(({ char, isActive, letterIndex }) => {
   const charRef = useRef(null);
   const [className, setClassName] = useState("");
   const { inputValue } = useStateContext();
@@ -29,7 +29,7 @@ const Letter = ({ char, isActive, letterIndex }) => {
       {char}
     </span>
   );
-};
+});
 
 const Word = ({ word, wordActiveIndex }) => {
   const { activeIndex } = useStateContext();

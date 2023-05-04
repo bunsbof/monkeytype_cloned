@@ -1,64 +1,14 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 import Beam from "./Beam";
 import Input from "./Input";
 import { useSelector } from "react-redux";
 
-const words = [
-  "take",
-  "fashion",
-  "leather",
-  "forensic",
-  "marble",
-  "divide",
-  "unending",
-  "banding",
-  "broad",
-  "subjugate",
-  "determine",
-  "inflate",
-  "forthcoming",
-  "climate",
-  "make",
-  "drunkenness",
-  "yoke",
-  "glumness",
-  "paw",
-  "predict",
-  "stamina",
-  "interpretation",
-  "fulsome",
-  "businesswoman",
-  "pause",
-  "inaugurate",
-  "slot",
-  "immersion",
-  "espouse",
-  "exclusion",
-  "accomplice",
-  "revival",
-  "complain",
-  "cadaver",
-  "away",
-  "stall",
-  "propagate",
-  "elephant",
-  "retaliation",
-  "blank",
-  "warrior",
-  "apathy",
-  "visual",
-  "blatant",
-  "miracle",
-];
-
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
   const hashed = useSelector((state) => state.main.words.value);
-  useEffect(() => {
-    console.log(hashed);
-  }, []);
+  const words = hashed.getWords();
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
