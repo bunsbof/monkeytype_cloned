@@ -1,51 +1,44 @@
 import { memo, useEffect, useRef, useState } from "react";
-
 import { useStateContext } from "../../../contexts/ContextProvider";
 
-const Letter = memo(({ char, isActive, letterIndex }) => {
-  const charRef = useRef(null);
-  const [className, setClassName] = useState("");
-  const { inputValue } = useStateContext();
+const Word = memo(({ word, wordActiveIndex }) => {
+  const charRefs = useRef([]);
+  const [classNames, setClassNames] = useState([]);
+
+  const { activeIndex, inputValue } = useStateContext();
 
   useEffect(() => {
-    if (
-      charRef.current &&
-      isActive &&
-      charRef.current.parentElement.classList.contains("active")
-    ) {
-      // compare the current character with the input value
-      if (char === inputValue[letterIndex]) {
-        setClassName("correct");
-      } else if (inputValue[letterIndex]) {
-        setClassName("incorrect");
-      } else {
-        setClassName("");
-      }
+    if (wordActiveIndex === activeIndex) {
+      const newClassNames = Array(word.length).fill("");
+
+      word.split("").forEach((char, index) => {
+        const charRef = charRefs.current[index];
+        if (charRef.parentElement.classList.contains("active")) {
+          if (char === inputValue[index]) {
+            newClassNames[index] = "correct";
+          } else if (inputValue[index]) {
+            newClassNames[index] = "incorrect";
+          }
+        }
+      });
+
+      setClassNames(newClassNames);
     }
-  }, [isActive, inputValue, letterIndex, char]);
-
-  return (
-    <span ref={charRef} className={className}>
-      {char}
-    </span>
-  );
-});
-
-const Word = ({ word, wordActiveIndex }) => {
-  const { activeIndex } = useStateContext();
+  }, [activeIndex, inputValue, word, wordActiveIndex]);
 
   return (
     <div className={`word${wordActiveIndex === activeIndex ? " active" : ""}`}>
       {word.split("").map((char, index) => (
-        <Letter
+        <span
           key={index}
-          char={char}
-          isActive={wordActiveIndex === activeIndex}
-          letterIndex={index}
-        />
+          ref={(el) => (charRefs.current[index] = el)}
+          className={classNames[index]}
+        >
+          {char}
+        </span>
       ))}
     </div>
   );
-};
+});
 
-export default memo(Word);
+export default Word;

@@ -1,9 +1,14 @@
 export class WordHash {
   constructor(initialWords = []) {
     this.wordHash = new Map();
-    initialWords.forEach((word, idx) =>
-      this.setWord(word, { input: "", errors: 0, wordIndex: idx })
-    );
+    initialWords.forEach((word, idx) => {
+      const currentWord = this.getWord(word);
+      if (currentWord) {
+        currentWord.occurrenceIndices.push(idx);
+      } else {
+        this.setWord(word, { input: "", errors: 0, occurrenceIndices: [idx] });
+      }
+    });
   }
 
   setWord(word, value) {
@@ -15,7 +20,18 @@ export class WordHash {
   }
 
   getWords() {
-    return Array.from(this.wordHash.keys());
+    const wordsArr = [];
+    this.wordHash.forEach((value, key) => {
+      const indices = value.occurrenceIndices;
+      if (Array.isArray(indices) && indices.length > 0) {
+        indices.forEach((index) => {
+          wordsArr[index] = key;
+        });
+      } else {
+        wordsArr.push(key);
+      }
+    });
+    return wordsArr;
   }
 
   deleteWord(word) {

@@ -9,6 +9,7 @@ function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
   const hashed = useSelector((state) => state.main.words.value);
   const words = hashed.getWords();
+  // if (words) console.log(words);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
