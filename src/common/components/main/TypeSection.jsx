@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 import Beam from "./Beam";
