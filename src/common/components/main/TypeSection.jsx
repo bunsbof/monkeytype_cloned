@@ -1,8 +1,9 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 import Beam from "./Beam";
 import Input from "./Input";
+import { useSelector } from "react-redux";
 
 const words = [
   "take",
@@ -54,6 +55,10 @@ const words = [
 
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
+  const hashed = useSelector((state) => state.main.words.value);
+  useEffect(() => {
+    console.log(hashed);
+  }, []);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>

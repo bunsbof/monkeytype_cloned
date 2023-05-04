@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Navbar, Footer } from "./common/components";
-import { HomePage } from "./pages";
+import { Navbar, Footer } from "../common/components";
+import { HomePage } from "../pages";
 
 function App() {
   const backgroundRef = useRef(null);
