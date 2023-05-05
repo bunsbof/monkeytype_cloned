@@ -6,7 +6,12 @@ export class WordHash {
       if (currentWord) {
         currentWord.occurrenceIndices.push(idx);
       } else {
-        this.setWord(word, { input: "", errors: 0, occurrenceIndices: [idx] });
+        this.setWord(word, {
+          input: "",
+          errors: 0,
+          wordIndex: idx,
+          occurrenceIndices: [idx],
+        });
       }
     });
   }
@@ -34,15 +39,11 @@ export class WordHash {
     return wordsArr;
   }
 
-  deleteWord(word) {
-    this.wordHash.delete(word);
-  }
-
-  clear() {
-    this.wordHash.clear();
-  }
-
-  size() {
-    return this.wordHash.size;
+  toSerializable() {
+    const serializableObject = {};
+    this.wordHash.forEach((value, key) => {
+      serializableObject[key] = value;
+    });
+    return serializableObject;
   }
 }

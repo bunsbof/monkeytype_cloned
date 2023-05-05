@@ -5,10 +5,13 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useDispatch } from "react-redux";
+import { updateWordInput } from "../app/main/word/wordSlice";
 
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
   const [compareValue, setcompareValue] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,6 +35,8 @@ export const ContextProvider = ({ children }) => {
       event.preventDefault();
     } else if (inputValue && event.key === " ") {
       event.preventDefault();
+      dispatch(updateWordInput({ wordIndex: activeIndex, input: inputValue }));
+      // to be fixed
       setcompareValue(inputValue);
       setActiveIndex((index) => index + 1);
       setInputValue("");

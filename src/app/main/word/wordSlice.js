@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { WordHash } from "../../../utils/hashedWord"; // Import the WordHash class
+import produce from "immer";
+import { WordHash } from "../../../utils/hashedWord";
 
 const words = [
   "take",
   "fashion",
   "leather",
-  "take",
   "forensic",
-  "marble",
   "take",
+  "marble",
   "divide",
   "unending",
   "banding",
+  "take",
   "broad",
   "subjugate",
   "determine",
@@ -26,7 +27,6 @@ const words = [
   "predict",
 ];
 
-// Initialize the state with a new instance of WordHash
 const initialState = {
   value: new WordHash(words),
 };
@@ -34,7 +34,53 @@ const initialState = {
 export const wordsSlice = createSlice({
   name: "words",
   initialState,
-  reducers: {},
+  reducers: {
+    updateWordInput: (state, action) =>
+      produce(state, (draftState) => {
+        const { wordIndex, input } = action.payload;
+        const wordEntry = draftState.value.getWord(words[wordIndex]);
+        if (wordEntry) {
+          wordEntry.input = input;
+        }
+      }),
+  },
 });
+
+export function serialize(state) {
+  // Serialize the WordHash object into a plain object
+  const serializedWordHash = Array.from(state.words.value.wordHash.entries()).reduce(
+    (acc, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    },
+    {}
+  );
+
+  return {
+    ...state,
+    words: {
+      ...state.words,
+      value: serializedWordHash,
+    },
+  };
+}
+
+export function deserialize(state) {
+  // Deserialize the plain object into a WordHash object
+  const deserializedWordHash = new WordHash();
+  Object.entries(state.words.value).forEach(([key, value]) => {
+    deserializedWordHash.setWord(key, value);
+  });
+
+  return {
+    ...state,
+    words: {
+      ...state.words,
+      value: deserializedWordHash,
+    },
+  };
+}
+
+export const { updateWordInput } = wordsSlice.actions;
 
 export default wordsSlice.reducer;

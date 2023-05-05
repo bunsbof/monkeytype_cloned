@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import Word from "./Word";
 import Beam from "./Beam";
@@ -7,9 +6,9 @@ import { useSelector } from "react-redux";
 
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
-  const hashed = useSelector((state) => state.main.words.value);
-  const words = hashed.getWords();
-  // if (words) console.log(words);
+  const words = useSelector((state) => state.main.words.value).getWords();
+  // const hashed = useSelector((state) => state.main.words.value);
+  // if (hashed) console.log(hashed);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
@@ -33,7 +32,7 @@ function TypeSection() {
             width: "100%",
           }}
         >
-          {words.map((word, index) => (
+          {words?.map((word, index) => (
             <Word key={index} word={word} wordActiveIndex={index} />
           ))}
         </div>
@@ -42,4 +41,4 @@ function TypeSection() {
   );
 }
 
-export default memo(TypeSection);
+export default TypeSection;
