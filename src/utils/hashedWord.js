@@ -1,17 +1,53 @@
 export class WordHash {
   constructor(initialWords = []) {
     this.wordHash = new Map();
+    const duplicatedWords = new Set();
     initialWords.forEach((word, idx) => {
-      const currentWord = this.getWord(word);
-      if (currentWord) {
-        currentWord.occurrenceIndices.push(idx);
+      if (duplicatedWords.has(word)) {
+        const currentWord = this.getWord(word);
+        if (currentWord) {
+          const occurrenceIndices = currentWord.occurrenceIndices;
+          const isAlreadyIndexed = occurrenceIndices.some(
+            (oi) => oi.wordIndex === idx
+          );
+          if (!isAlreadyIndexed) {
+            occurrenceIndices.push({
+              name: word,
+              input: "",
+              errors: 0,
+              wordIndex: idx,
+            });
+          }
+        } else {
+          this.setWord(word, {
+            input: "",
+            errors: 0,
+            wordIndex: idx,
+            occurrenceIndices: [
+              {
+                name: word,
+                input: "",
+                errors: 0,
+                wordIndex: duplicatedWords[word],
+              },
+              { name: word, input: "", errors: 0, wordIndex: idx },
+            ],
+          });
+        }
       } else {
+        duplicatedWords.add(word);
         this.setWord(word, {
           input: "",
           errors: 0,
           wordIndex: idx,
-          occurrenceIndices: [idx],
+          occurrenceIndices: [],
         });
+      }
+    });
+
+    this.wordHash.forEach((value, key) => {
+      if (value.occurrenceIndices.length === 0) {
+        delete value.occurrenceIndices;
       }
     });
   }
@@ -24,19 +60,32 @@ export class WordHash {
     return this.wordHash.get(word);
   }
 
+  // getWords() {
+  //   const wordsArr = new Array(this.wordHash.size);
+  //   this.wordHash.forEach((value) => {
+  //     const indices = value.occurrenceIndices;
+  //     if (Array.isArray(indices) && indices.length > 0) {
+  //       indices.forEach((index) => {
+  //         wordsArr[index] = value.name;
+  //       });
+  //     } else {
+  //       wordsArr[value.wordIndex] = value.name;
+  //     }
+  //   });
+  //   return wordsArr;
+  // }
+
   getWords() {
-    const wordsArr = [];
+    const words = new Array(this.wordHash.size);
     this.wordHash.forEach((value, key) => {
-      const indices = value.occurrenceIndices;
-      if (Array.isArray(indices) && indices.length > 0) {
-        indices.forEach((index) => {
-          wordsArr[index] = key;
+      words[value.wordIndex] = key;
+      if (value.occurrenceIndices) {
+        value.occurrenceIndices.forEach((occurrenceIndex) => {
+          words[occurrenceIndex.wordIndex] = occurrenceIndex.name;
         });
-      } else {
-        wordsArr.push(key);
       }
     });
-    return wordsArr;
+    return words.filter((word) => word !== undefined);
   }
 
   toSerializable() {
