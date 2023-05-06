@@ -16,6 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [compareValue, setcompareValue] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLanguageRightToLeft, setIsLanguageRightToLeft] = useState(false);
+  const [test, setTest] = useState(""); // this is for testing fix it later on
   const wordsRef = useRef(null);
   const inputRef = useRef(null);
   const beamRef = useRef(null);
@@ -35,11 +36,18 @@ export const ContextProvider = ({ children }) => {
       event.preventDefault();
     } else if (inputValue && event.key === " ") {
       event.preventDefault();
-      dispatch(updateWordInput({ wordIndex: activeIndex, input: inputValue }));
+      dispatch(
+        updateWordInput({
+          word: test,
+          wordIndex: activeIndex,
+          input: inputValue,
+        })
+      );
       // to be fixed
       setcompareValue(inputValue);
       setActiveIndex((index) => index + 1);
       setInputValue("");
+      setTest("")
     } else if (event.key === "Backspace") {
       const wordsList = Array.from(document.querySelectorAll("#words .word"));
       const previousWordIndex = activeIndex - 1;
@@ -96,10 +104,12 @@ export const ContextProvider = ({ children }) => {
         activeIndex,
         isLanguageRightToLeft,
         compareValue,
+        test,
         wordsRef,
         inputRef,
         beamRef,
         charRef,
+        setTest,
         setcompareValue,
         setIsLanguageRightToLeft,
         setInputValue,

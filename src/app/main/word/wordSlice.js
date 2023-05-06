@@ -37,10 +37,31 @@ export const wordsSlice = createSlice({
   reducers: {
     updateWordInput: (state, action) =>
       produce(state, (draftState) => {
-        const { wordIndex, input } = action.payload;
-        const wordEntry = draftState.value.getWord(words[wordIndex]);
+        const { word, wordIndex, input } = action.payload;
+        const wordEntry = draftState.value.getWord(word);
+
         if (wordEntry) {
-          wordEntry.input = input;
+          if (
+            wordEntry.occurrenceIndices &&
+            wordEntry.occurrenceIndices.length > 0
+          ) {
+            if (wordEntry.wordIndex === wordIndex) {
+              // Modify input of the main key
+              wordEntry.input = input;
+            } else {
+              // Loop through occurrenceIndices to find matching wordIndex
+              const occurrenceIndex = wordEntry.occurrenceIndices.find(
+                (oi) => oi.wordIndex === wordIndex
+              );
+              if (occurrenceIndex) {
+                // Modify input of the matched occurrenceIndex
+                occurrenceIndex.input = input;
+              }
+            }
+          } else {
+            // Modify input of the main key (non-duplicate word)
+            wordEntry.input = input;
+          }
         }
       }),
   },
@@ -48,13 +69,12 @@ export const wordsSlice = createSlice({
 
 export function serialize(state) {
   // Serialize the WordHash object into a plain object
-  const serializedWordHash = Array.from(state.words.value.wordHash.entries()).reduce(
-    (acc, [key, value]) => {
-      acc[key] = value;
-      return acc;
-    },
-    {}
-  );
+  const serializedWordHash = Array.from(
+    state.words.value.wordHash.entries()
+  ).reduce((acc, [key, value]) => {
+    acc[key] = value;
+    return acc;
+  }, {});
 
   return {
     ...state,

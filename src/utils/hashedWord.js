@@ -60,21 +60,6 @@ export class WordHash {
     return this.wordHash.get(word);
   }
 
-  // getWords() {
-  //   const wordsArr = new Array(this.wordHash.size);
-  //   this.wordHash.forEach((value) => {
-  //     const indices = value.occurrenceIndices;
-  //     if (Array.isArray(indices) && indices.length > 0) {
-  //       indices.forEach((index) => {
-  //         wordsArr[index] = value.name;
-  //       });
-  //     } else {
-  //       wordsArr[value.wordIndex] = value.name;
-  //     }
-  //   });
-  //   return wordsArr;
-  // }
-
   getWords() {
     const words = new Array(this.wordHash.size);
     this.wordHash.forEach((value, key) => {

@@ -5,11 +5,12 @@ const Word = memo(({ word, wordActiveIndex }) => {
   const charRefs = useRef([]);
   const [classNames, setClassNames] = useState([]);
 
-  const { activeIndex, inputValue } = useStateContext();
+  const { activeIndex, inputValue, setTest } = useStateContext();
 
   useEffect(() => {
     if (wordActiveIndex === activeIndex) {
       const newClassNames = Array(word.length).fill("");
+      setTest(word);
 
       word.split("").forEach((char, index) => {
         const charRef = charRefs.current[index];
