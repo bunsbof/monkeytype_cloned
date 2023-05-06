@@ -1,23 +1,28 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useStateContext } from "../../../contexts/ContextProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { setKeyValue } from "../../../app/main/input/inputSlice";
 
 const Word = memo(({ word, wordActiveIndex }) => {
+  const { input, activeWordIndex } = useSelector((state) => ({
+    input: state.main.input.value,
+    activeWordIndex: state.main.words.activeWordIndex,
+  }));
+
+  const dispatch = useDispatch();
+
   const charRefs = useRef([]);
   const [classNames, setClassNames] = useState([]);
 
-  const { activeIndex, inputValue, setTest } = useStateContext();
-
   useEffect(() => {
-    if (wordActiveIndex === activeIndex) {
+    if (wordActiveIndex === activeWordIndex) {
       const newClassNames = Array(word.length).fill("");
-      setTest(word);
-
+      dispatch(setKeyValue(word));
       word.split("").forEach((char, index) => {
         const charRef = charRefs.current[index];
         if (charRef.parentElement.classList.contains("active")) {
-          if (char === inputValue[index]) {
+          if (char === input[index]) {
             newClassNames[index] = "correct";
-          } else if (inputValue[index]) {
+          } else if (input[index]) {
             newClassNames[index] = "incorrect";
           }
         }
@@ -25,10 +30,12 @@ const Word = memo(({ word, wordActiveIndex }) => {
 
       setClassNames(newClassNames);
     }
-  }, [activeIndex, inputValue, word, wordActiveIndex]);
+  }, [activeWordIndex, input, word, wordActiveIndex]);
 
   return (
-    <div className={`word${wordActiveIndex === activeIndex ? " active" : ""}`}>
+    <div
+      className={`word${wordActiveIndex === activeWordIndex ? " active" : ""}`}
+    >
       {word.split("").map((char, index) => (
         <span
           key={index}

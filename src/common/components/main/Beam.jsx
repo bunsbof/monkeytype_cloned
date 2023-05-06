@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import * as Misc from "../../../utils/misc";
+import { useSelector } from "react-redux";
 
 const Beam = () => {
-  const { beamRef, inputValue, isLanguageRightToLeft, wordsRef } =
-    useStateContext();
+  const { input } = useSelector((state) => ({
+    input: state.main.input.value,
+  }));
+  const { beamRef, isLanguageRightToLeft, wordsRef } = useStateContext();
   const [caretWidth, setCaretWidth] = useState(0);
   const [findActiveWord, setFindActiveWord] = useState(null);
   const animationRef = useRef(null);
@@ -25,7 +28,7 @@ const Beam = () => {
       const newActiveWord = document.querySelector("#words .active");
       setFindActiveWord(newActiveWord);
 
-      const inputLen = inputValue.length;
+      const inputLen = input.length;
       const currentLetterIndex = inputLen;
 
       const currentWordNodeList = newActiveWord?.querySelectorAll("span");
@@ -81,7 +84,7 @@ const Beam = () => {
     return () => {
       observer.disconnect(); // clean up observer
     };
-  }, [inputValue]);
+  }, [input]);
 
   const handleAnimationEnd = () => {
     /* handle animation end */

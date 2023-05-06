@@ -29,6 +29,8 @@ const words = [
 
 const initialState = {
   value: new WordHash(words),
+  activeWordIndex: 0,
+  classNames: [],
 };
 
 export const wordsSlice = createSlice({
@@ -64,6 +66,9 @@ export const wordsSlice = createSlice({
           }
         }
       }),
+    activeWordIndexInc: (state) => {
+      state.activeWordIndex += 1;
+    },
   },
 });
 
@@ -101,6 +106,6 @@ export function deserialize(state) {
   };
 }
 
-export const { updateWordInput } = wordsSlice.actions;
+export const { updateWordInput, activeWordIndexInc } = wordsSlice.actions;
 
 export default wordsSlice.reducer;
