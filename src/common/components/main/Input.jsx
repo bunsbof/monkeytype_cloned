@@ -42,6 +42,8 @@ const Input = () => {
 
     if (wordArray.length < userInputArray.length) {
       errors += userInputArray.length - wordArray.length;
+    } else if (wordArray.length > userInputArray.length) {
+      errors += wordArray.length - userInputArray.length;
     }
 
     return errors;
@@ -50,7 +52,6 @@ const Input = () => {
   const handleInputValue = (event) => {
     const value = event.target.value.trim();
     dispatch(setInputValue(value));
-    
   };
 
   const handleInputKeyDown = (event) => {
