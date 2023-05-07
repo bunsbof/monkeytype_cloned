@@ -39,7 +39,7 @@ export const wordsSlice = createSlice({
   reducers: {
     updateWordInput: (state, action) =>
       produce(state, (draftState) => {
-        const { word, wordIndex, input } = action.payload;
+        const { word, wordIndex, input, errors } = action.payload;
         const wordEntry = draftState.value.getWord(word);
 
         if (wordEntry) {
@@ -50,6 +50,7 @@ export const wordsSlice = createSlice({
             if (wordEntry.wordIndex === wordIndex) {
               // Modify input of the main key
               wordEntry.input = input;
+              wordEntry.errors = errors;
             } else {
               // Loop through occurrenceIndices to find matching wordIndex
               const occurrenceIndex = wordEntry.occurrenceIndices.find(
@@ -58,11 +59,13 @@ export const wordsSlice = createSlice({
               if (occurrenceIndex) {
                 // Modify input of the matched occurrenceIndex
                 occurrenceIndex.input = input;
+                occurrenceIndex.errors = errors;
               }
             }
           } else {
             // Modify input of the main key (non-duplicate word)
             wordEntry.input = input;
+            wordEntry.errors = errors;
           }
         }
       }),

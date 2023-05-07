@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: "",
   key: "",
+  errors: 0,
 };
 
 export const inputSlice = createSlice({
@@ -18,6 +19,7 @@ export const inputSlice = createSlice({
     resetInputValue: (state) => {
       state.value = "";
       state.key = "";
+      state.errors = 0;
     },
   },
 });
