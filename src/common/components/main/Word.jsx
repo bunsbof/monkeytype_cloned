@@ -1,6 +1,7 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setKeyValue } from "../../../app/main/input/inputSlice";
+import { selectInputByWordIndex } from "../../../app/main/word/wordSlice";
 
 const Word = memo(({ word, wordActiveIndex }) => {
   const { input, activeWordIndex } = useSelector((state) => ({
@@ -12,6 +13,11 @@ const Word = memo(({ word, wordActiveIndex }) => {
 
   const charRefs = useRef([]);
   const [classNames, setClassNames] = useState([]);
+
+  const passedErrors = useSelector(
+    selectInputByWordIndex(wordActiveIndex)
+  ).passedErrors;
+  const isError = useMemo(() => passedErrors > 0, [passedErrors]);
 
   useEffect(() => {
     if (wordActiveIndex === activeWordIndex) {
@@ -30,11 +36,13 @@ const Word = memo(({ word, wordActiveIndex }) => {
 
       setClassNames(newClassNames);
     }
-  }, [activeWordIndex, input, word, wordActiveIndex]);
+  }, [activeWordIndex, input, word, wordActiveIndex, dispatch]);
 
   return (
     <div
-      className={`word${wordActiveIndex === activeWordIndex ? " active" : ""}`}
+      className={`word${wordActiveIndex === activeWordIndex ? " active" : ""}${
+        isError ? " error" : ""
+      }`}
     >
       {word.split("").map((char, index) => (
         <span

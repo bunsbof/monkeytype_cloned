@@ -26,7 +26,7 @@ const Input = () => {
 
   const dispatch = useDispatch();
 
-  const { inputRef, wordsRef } = useStateContext();
+  const { inputRef } = useStateContext();
 
   const checkErrors = (word, userInput) => {
     const wordArray = word.split("");
@@ -48,8 +48,9 @@ const Input = () => {
   };
 
   const handleInputValue = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.trim();
     dispatch(setInputValue(value));
+    
   };
 
   const handleInputKeyDown = (event) => {
@@ -75,84 +76,60 @@ const Input = () => {
     ) {
       dispatch(activeWordIndexDec());
       dispatch(setInputValue(passedInput + " "));
-      console.log({
-        "Passed Input": passedInput,
-        "Passed Key": passedKey,
-        "Passed Errors": passedErrors,
-      });
     } else if (event.key === "Delete") event.preventDefault();
-    // else if (event.key === "Backspace") {
-    //   const wordsList = Array.from(document.querySelectorAll("#words .word"));
-    //   const previousWordIndex = activeWordIndex - 1;
-
-    //   if (previousWordIndex >= 0) {
-    //     const previousWord = wordsList[previousWordIndex];
-    //     if (input.length > previousWord.textContent.length) return;
-    //     if (
-    //       inputValue === "" &&
-    //       input &&
-    //       previousWord.matches(".error")
-    //     ) {
-    //       const activeWord = wordsList[activeWordIndex];
-    //       activeWord.classList.remove("error");
-    //       setActiveIndex((ind) => Math.max(0, ind - 1));
-    //       setInputValue(input);
-    //     }
-    //   }
-    // }
   };
 
-  useEffect(() => {
-    const handleInput = () => {
-      const activeWord = document.querySelector("#words .active");
-      const activeWordText = activeWord && activeWord.textContent;
-      const previousWord = activeWord && activeWord.previousElementSibling;
-      const previousWordText = previousWord?.textContent;
+  // useEffect(() => {
+  //   const handleInput = () => {
+  //     const activeWord = document.querySelector("#words .active");
+  //     const activeWordText = activeWord && activeWord.textContent;
+  //     const previousWord = activeWord && activeWord.previousElementSibling;
+  //     const previousWordText = previousWord?.textContent;
 
-      // Handle extra input
-      // if (
-      //   input &&
-      //   activeWordText &&
-      //   input !== activeWordText &&
-      //   input.length > activeWordText.length &&
-      //   !activeWord.classList.contains("error")
-      // ) {
-      //   activeWord.classList.add("error");
-      // }
+  //     Handle extra input
+  //     if (
+  //       input &&
+  //       activeWordText &&
+  //       input !== activeWordText &&
+  //       input.length > activeWordText.length &&
+  //       !activeWord.classList.contains("error")
+  //     ) {
+  //       activeWord.classList.add("error");
+  //     }
 
-      // Handle incorrect input
-      // if (
-      //   previousWordText &&
-      //   input &&
-      //   previousWordText !== input
-      // ) {
-      //   const hasIncorrectSpan = previousWord.querySelector("span.incorrect");
-      //   const spans = previousWord.querySelectorAll("span");
-      //   const hasSpanWithNoClass = Array.from(spans).some(
-      //     (span) => !span.classList.length
-      //   );
+  //     Handle incorrect input
+  //     if (
+  //       previousWordText &&
+  //       input &&
+  //       previousWordText !== input
+  //     ) {
+  //       const hasIncorrectSpan = previousWord.querySelector("span.incorrect");
+  //       const spans = previousWord.querySelectorAll("span");
+  //       const hasSpanWithNoClass = Array.from(spans).some(
+  //         (span) => !span.classList.length
+  //       );
 
-      //   if (
-      //     hasIncorrectSpan ||
-      //     hasSpanWithNoClass ||
-      //     input.length > previousWordText.length
-      //   ) {
-      //     previousWord.classList.add("error");
-      //   } else {
-      //     previousWord.classList.remove("error");
-      //   }
-      // }
-    };
+  //       if (
+  //         hasIncorrectSpan ||
+  //         hasSpanWithNoClass ||
+  //         input.length > previousWordText.length
+  //       ) {
+  //         previousWord.classList.add("error");
+  //       } else {
+  //         previousWord.classList.remove("error");
+  //       }
+  //     }
+  //   };
 
-    handleInput();
+  //   handleInput();
 
-    const observer = new MutationObserver(handleInput);
-    observer.observe(wordsRef.current, { attributes: true, childList: true });
+  //   const observer = new MutationObserver(handleInput);
+  //   observer.observe(wordsRef.current, { attributes: true, childList: true });
 
-    return () => {
-      observer.disconnect(); // clean up observer
-    };
-  }, [input]);
+  //   return () => {
+  //     observer.disconnect(); // clean up observer
+  //   };
+  // }, [input]);
 
   return (
     <input
