@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
 import { WordHash } from "../../../utils/hashedWord";
 
@@ -32,6 +32,19 @@ const initialState = {
   activeWordIndex: 0,
   classNames: [],
 };
+
+export const selectInputByWordIndex = (wordIndex) =>
+  createSelector(
+    (state) => state.main.words.value,
+    (value) => {
+      const wordEntry = value.getWordByIndex(wordIndex);
+      return {
+        passedInput: wordEntry?.passedInput ?? "",
+        passedKey: wordEntry?.passedKey ?? "",
+        passedErrors: wordEntry?.passedErrors ?? 0,
+      };
+    }
+  );
 
 export const wordsSlice = createSlice({
   name: "words",
@@ -69,8 +82,14 @@ export const wordsSlice = createSlice({
           }
         }
       }),
+    updateKeyInputBaseActiveIndex: (state, action) => {},
     activeWordIndexInc: (state) => {
       state.activeWordIndex += 1;
+    },
+    activeWordIndexDec: (state) => {
+      if (state.activeWordIndex > 0) {
+        state.activeWordIndex -= 1;
+      }
     },
   },
 });
@@ -109,6 +128,7 @@ export function deserialize(state) {
   };
 }
 
-export const { updateWordInput, activeWordIndexInc } = wordsSlice.actions;
+export const { updateWordInput, activeWordIndexInc, activeWordIndexDec } =
+  wordsSlice.actions;
 
 export default wordsSlice.reducer;

@@ -60,6 +60,42 @@ export class WordHash {
     return this.wordHash.get(word);
   }
 
+  getWordByIndex(wordIndex) {
+    const words = this.toSerializable();
+    const key = this.getWords()[wordIndex];
+
+    if (words) {
+      const mainKey = words[key];
+      if (mainKey) {
+        if (mainKey.wordIndex === wordIndex) {
+          // Get input and key of the main key
+          const { input, errors } = mainKey;
+          return { passedInput: input, passedKey: key, passedErrors: errors };
+        } else if (
+          mainKey.occurrenceIndices &&
+          mainKey.occurrenceIndices.length > 0
+        ) {
+          // Loop through occurrenceIndices to find matching wordIndex
+          const occurrenceIndex = mainKey.occurrenceIndices.find(
+            (oi) => oi.wordIndex === wordIndex
+          );
+          if (occurrenceIndex) {
+            // Get the input and name inside the occurrenceIndices array of objects
+            const { input, name, errors } = occurrenceIndex;
+            return {
+              passedInput: input,
+              passedKey: name,
+              passedErrors: errors,
+            };
+          }
+        }
+      }
+    }
+
+    // Return undefined if the wordIndex is not found
+    return undefined;
+  }
+
   getWords() {
     const words = new Array(this.wordHash.size);
     this.wordHash.forEach((value, key) => {

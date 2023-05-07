@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
   const words = useSelector((state) => state.main.words.value).getWords();
-  const hashed = useSelector((state) => state.main.words.value).toSerializable();
-  if (hashed) console.log(hashed);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>

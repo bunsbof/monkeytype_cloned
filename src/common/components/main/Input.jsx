@@ -6,17 +6,23 @@ import {
   setInputValue,
 } from "../../../app/main/input/inputSlice";
 import {
+  activeWordIndexDec,
   activeWordIndexInc,
+  selectInputByWordIndex,
   updateWordInput,
 } from "../../../app/main/word/wordSlice";
 
 const Input = () => {
-  const { input, key, activeWordIndex, errors } = useSelector((state) => ({
+  const { input, key, activeWordIndex } = useSelector((state) => ({
     input: state.main.input.value,
     key: state.main.input.key,
     activeWordIndex: state.main.words.activeWordIndex,
     errors: state.main.input.errors,
   }));
+
+  const { passedInput, passedKey, passedErrors } = useSelector(
+    selectInputByWordIndex(activeWordIndex - 1)
+  );
 
   const dispatch = useDispatch();
 
@@ -26,10 +32,16 @@ const Input = () => {
     const wordArray = word.split("");
     const userInputArray = userInput.split("");
     let errors = 0;
-    for (let i = 0; i < wordArray.length; i++) {
+    const length = Math.min(wordArray.length, userInputArray.length);
+
+    for (let i = 0; i < length; i++) {
       if (userInputArray[i] !== wordArray[i]) {
         errors++;
       }
+    }
+
+    if (wordArray.length < userInputArray.length) {
+      errors += userInputArray.length - wordArray.length;
     }
 
     return errors;
@@ -45,7 +57,6 @@ const Input = () => {
       event.preventDefault();
     } else if (input && event.key === " ") {
       event.preventDefault();
-
       dispatch(
         updateWordInput({
           word: key,
@@ -56,7 +67,20 @@ const Input = () => {
       );
       dispatch(activeWordIndexInc());
       dispatch(resetInputValue());
-    }
+    } else if (
+      event.key === "Backspace" &&
+      !input &&
+      activeWordIndex > 0 &&
+      passedErrors > 0
+    ) {
+      dispatch(activeWordIndexDec());
+      dispatch(setInputValue(passedInput + " "));
+      console.log({
+        "Passed Input": passedInput,
+        "Passed Key": passedKey,
+        "Passed Errors": passedErrors,
+      });
+    } else if (event.key === "Delete") event.preventDefault();
     // else if (event.key === "Backspace") {
     //   const wordsList = Array.from(document.querySelectorAll("#words .word"));
     //   const previousWordIndex = activeWordIndex - 1;
