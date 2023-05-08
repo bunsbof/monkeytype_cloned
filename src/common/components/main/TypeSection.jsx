@@ -19,7 +19,7 @@ function TypeSection() {
         wordsContainerRef.current.querySelector(".active");
       if (activeWordElement) {
         activeWordElement.scrollIntoView({
-          behavior: "smooth",
+          behavior: "instant",
           block: "nearest",
         });
       }
@@ -41,7 +41,7 @@ function TypeSection() {
             Math.ceil(wrapperHeight / lineHeight) * lineHeight;
           wordsContainerRef.current.scrollTo({
             top: wordsContainerRef.current.scrollTop + scrollAmount,
-            behavior: "smooth",
+            behavior: "instant",
           });
         }
       }
