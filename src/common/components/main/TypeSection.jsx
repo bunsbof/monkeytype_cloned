@@ -3,16 +3,57 @@ import Word from "./Word";
 import Beam from "./Beam";
 import Input from "./Input";
 import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
 
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
+  const { activeWordIndex } = useSelector((state) => ({
+    activeWordIndex: state.main.words.activeWordIndex,
+  }));
   const words = useSelector((state) => state.main.words.value).getWords();
+  const wordsContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (wordsContainerRef.current) {
+      const activeWordElement =
+        wordsContainerRef.current.querySelector(".active");
+      if (activeWordElement) {
+        activeWordElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [activeWordIndex]);
+
+  useEffect(() => {
+    if (wordsContainerRef.current) {
+      const secondLineWords = wordsContainerRef.current.querySelectorAll(
+        ".word:nth-child(n+4):nth-child(-n+6)"
+      );
+      if (secondLineWords.length === 0) {
+        const nextLineWord =
+          wordsContainerRef.current.querySelector(".word:nth-child(7)");
+        if (nextLineWord) {
+          const wrapperHeight = wordsContainerRef.current.clientHeight;
+          const lineHeight = nextLineWord.offsetHeight;
+          const scrollAmount =
+            Math.ceil(wrapperHeight / lineHeight) * lineHeight;
+          wordsContainerRef.current.scrollTo({
+            top: wordsContainerRef.current.scrollTop + scrollAmount,
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  }, [activeWordIndex]);
 
   return (
     <div id="typingTest" style={{ opacity: 1 }}>
       <Input />
 
       <div
+        ref={wordsContainerRef}
         id="wordsWrapper"
         translate="no"
         style={{ height: "114px", overflow: "hidden" }}
