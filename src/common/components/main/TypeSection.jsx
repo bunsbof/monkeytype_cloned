@@ -3,7 +3,7 @@ import Word from "./Word";
 import Beam from "./Beam";
 import Input from "./Input";
 import { useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function TypeSection() {
   const { wordsRef, handleWordWrapperFocus } = useStateContext();
@@ -12,6 +12,14 @@ function TypeSection() {
   }));
   const words = useSelector((state) => state.main.words.value).getWords();
   const wordsContainerRef = useRef(null);
+  const [scrollEffectHeight, setScrollEffectHeight] = useState(0);
+
+  useEffect(() => {
+    if (wordsContainerRef.current) {
+      setScrollEffectHeight(wordsContainerRef.current.scrollHeight);
+    }
+    if(scrollEffectHeight !== undefined) console.log(scrollEffectHeight)
+  }, [wordsContainerRef.current?.scrollHeight]);
 
   useEffect(() => {
     if (wordsContainerRef.current) {
@@ -58,7 +66,7 @@ function TypeSection() {
         translate="no"
         style={{ height: "114px", overflow: "hidden" }}
       >
-        <Beam />
+        <Beam scrollEffectHeight={scrollEffectHeight} />
         <div
           id="words"
           ref={wordsRef}

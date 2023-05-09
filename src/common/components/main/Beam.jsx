@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import * as Misc from "../../../utils/misc";
 import { useSelector } from "react-redux";
@@ -9,7 +9,6 @@ const Beam = () => {
   }));
   const { beamRef, isLanguageRightToLeft, wordsRef } = useStateContext();
   const [caretWidth, setCaretWidth] = useState(0);
-  const [findActiveWord, setFindActiveWord] = useState(null);
   const animationRef = useRef(null);
   const [animationObj, setAnimationObj] = useState({
     top: 0,
@@ -26,7 +25,6 @@ const Beam = () => {
   useEffect(() => {
     const handleWordChange = () => {
       const newActiveWord = document.querySelector("#words .active");
-      setFindActiveWord(newActiveWord);
 
       const inputLen = input.length;
       const currentLetterIndex = inputLen;
