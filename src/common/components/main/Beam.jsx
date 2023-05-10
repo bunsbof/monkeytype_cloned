@@ -29,9 +29,9 @@ const Beam = () => {
       const inputLen = input.length;
       const currentLetterIndex = inputLen;
 
-      const currentWordNodeList = newActiveWord?.querySelectorAll("span");
+      const currentWordNodeList = newActiveWord?.querySelectorAll("span");// need
       // if (currentWordNodeList) console.log(currentWordNodeList);
-      if (!currentWordNodeList) return null;
+      if (!currentWordNodeList) return null; //
 
       const currentLetter = currentWordNodeList[currentLetterIndex];
       const previousLetter =
@@ -56,7 +56,7 @@ const Beam = () => {
         letterPosTop -
         4 *
           Misc.convertRemToPixel(1) *
-          0.1; /* You'll need to define Config and Misc */
+          0.1; /* Sneed to define Config and Misc */
       let newLeft = letterPosLeft - caretWidth / 2;
 
       const newWidth =
@@ -65,11 +65,6 @@ const Beam = () => {
           : previousLetter.offsetWidth) *
           0.2 +
         "px";
-
-      let smoothlinescroll = document.querySelector(
-        "#words .smoothScroller"
-      )?.offsetHeight;
-      if (!smoothlinescroll) smoothlinescroll = 0;
       setAnimationObj({ top: newTop, left: newLeft, width: newWidth });
     };
 
@@ -137,6 +132,21 @@ const Beam = () => {
         }}
         onAnimationEnd={handleAnimationEnd}
       ></div>
+      {/* <div
+        id="caret"
+        ref={beamRef}
+        className="default"
+        // style="font-size: 1.5rem; animation-name: caretFlashSmooth; opacity: 1; display: block; top: 3.6px; left: 6px;"
+        style={{
+          fontSize: "1.5rem",
+          animationName: "caretFlashSmooth",
+          animationDuration: "1s", // Optionally, specify the duration of the animation
+          opacity: 1,
+          display: "block",
+          top: "0.6px",
+          left: "6px",
+        }}
+      ></div> */}
     </>
   );
 };

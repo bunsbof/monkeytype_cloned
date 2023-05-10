@@ -18,7 +18,7 @@ function TypeSection() {
     if (wordsContainerRef.current) {
       setScrollEffectHeight(wordsContainerRef.current.scrollHeight);
     }
-    if(scrollEffectHeight !== undefined) console.log(scrollEffectHeight)
+    // if(scrollEffectHeight !== undefined) console.log(scrollEffectHeight)
   }, [wordsContainerRef.current?.scrollHeight]);
 
   useEffect(() => {
