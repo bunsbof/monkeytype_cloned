@@ -1,83 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
-import * as Misc from "../../../utils/misc";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setCaretWidth } from "../../../app/main/beam/beamSlice";
 
 const Beam = () => {
-  const { input } = useSelector((state) => ({
-    input: state.main.input.value,
-  }));
-  const { beamRef, isLanguageRightToLeft, wordsRef } = useStateContext();
-  const [caretWidth, setCaretWidth] = useState(0);
+  const { beamRef, animationObj } = useStateContext();
+  const dispatch = useDispatch();
   const animationRef = useRef(null);
-  const [animationObj, setAnimationObj] = useState({
-    top: 0,
-    left: 0,
-    width: 0,
-  });
 
   useEffect(() => {
     if (beamRef.current) {
-      setCaretWidth(beamRef.current.offsetWidth);
+      dispatch(setCaretWidth(beamRef.current.offsetWidth));
     }
   }, []);
-
-  useEffect(() => {
-    const handleWordChange = () => {
-      const newActiveWord = document.querySelector("#words .active");
-
-      const inputLen = input.length;
-      const currentLetterIndex = inputLen;
-
-      const currentWordNodeList = newActiveWord?.querySelectorAll("span");// need
-      // if (currentWordNodeList) console.log(currentWordNodeList);
-      if (!currentWordNodeList) return null; //
-
-      const currentLetter = currentWordNodeList[currentLetterIndex];
-      const previousLetter =
-        currentWordNodeList[
-          Math.min(currentLetterIndex - 1, currentWordNodeList.length - 1)
-        ];
-
-      const letterPosLeft =
-        (currentLetter
-          ? currentLetter.offsetLeft
-          : previousLetter.offsetLeft + previousLetter.offsetWidth) +
-        (!isLanguageRightToLeft
-          ? 0
-          : currentLetter
-          ? currentLetter.offsetWidth
-          : -previousLetter.offsetWidth);
-      const letterPosTop = currentLetter
-        ? currentLetter.offsetTop
-        : previousLetter.offsetTop;
-
-      const newTop =
-        letterPosTop -
-        4 *
-          Misc.convertRemToPixel(1) *
-          0.1; /* Sneed to define Config and Misc */
-      let newLeft = letterPosLeft - caretWidth / 2;
-
-      const newWidth =
-        (currentLetter
-          ? currentLetter.offsetWidth
-          : previousLetter.offsetWidth) *
-          0.2 +
-        "px";
-      setAnimationObj({ top: newTop, left: newLeft, width: newWidth });
-    };
-
-    handleWordChange(); // initialize active word on mount
-
-    // listen for changes in active word
-    const observer = new MutationObserver(handleWordChange);
-    observer.observe(wordsRef.current, { attributes: true, childList: true });
-
-    return () => {
-      observer.disconnect(); // clean up observer
-    };
-  }, [input]);
 
   const handleAnimationEnd = () => {
     /* handle animation end */

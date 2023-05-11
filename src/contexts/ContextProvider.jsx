@@ -7,13 +7,22 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 
+import * as Misc from "../utils/misc";
+
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const { activeWordIndex } = useSelector((state) => ({
+  const { input, activeWordIndex, caretWidth } = useSelector((state) => ({
+    input: state.main.input.value,
     activeWordIndex: state.main.words.activeWordIndex,
+    caretWidth: state.main.beam.caretWidth,
   }));
   const [isLanguageRightToLeft, setIsLanguageRightToLeft] = useState(false);
+  const [animationObj, setAnimationObj] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
   const wordsRef = useRef(null);
   const inputRef = useRef(null);
   const beamRef = useRef(null);
@@ -23,6 +32,40 @@ export const ContextProvider = ({ children }) => {
     inputRef.current.focus();
   };
 
+  const handleWordChange = (activeELement) => {
+    if (!activeELement) return null; //
+
+    const currentLetter = activeELement.childNodes[input.length];
+    const previousLetter =
+      activeELement.childNodes[
+        Math.min(input.length - 1, activeELement.childNodes.length - 1)
+      ];
+
+    const letterPosLeft =
+      (currentLetter
+        ? currentLetter.offsetLeft
+        : previousLetter.offsetLeft + previousLetter.offsetWidth) +
+      (isLanguageRightToLeft
+        ? currentLetter
+          ? currentLetter.offsetWidth
+          : -previousLetter.offsetWidth
+        : 0);
+
+    const letterPosTop = currentLetter
+      ? currentLetter.offsetTop
+      : previousLetter.offsetTop;
+
+    const newTop =
+      letterPosTop -
+      4 * Misc.convertRemToPixel(1) * 0.1; /* Sneed to define Config and Misc */
+    let newLeft = letterPosLeft - caretWidth / 2;
+
+    const newWidth =
+      (currentLetter ? currentLetter.offsetWidth : previousLetter.offsetWidth) *
+        0.2 +
+      "px";
+    setAnimationObj({ top: newTop, left: newLeft, width: newWidth });
+  };
   useEffect(() => {
     if (wordsRef.current && wordsRef.current.children[activeWordIndex]) {
       wordsRef.current.children[activeWordIndex].classList.add("active");
@@ -58,12 +101,15 @@ export const ContextProvider = ({ children }) => {
       value={{
         activeWordIndex,
         isLanguageRightToLeft,
+        animationObj,
         wordsRef,
         inputRef,
         beamRef,
         charRef,
+        setAnimationObj,
         setIsLanguageRightToLeft,
         handleWordWrapperFocus,
+        handleWordChange,
       }}
     >
       {children}

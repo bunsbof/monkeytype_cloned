@@ -2,8 +2,10 @@ import { memo, useEffect, useRef, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setKeyValue } from "../../../app/main/input/inputSlice";
 import { selectInputByWordIndex } from "../../../app/main/word/wordSlice";
+import { useStateContext } from "../../../contexts/ContextProvider";
 
 const Word = memo(({ word, wordActiveIndex }) => {
+  const { handleWordChange } = useStateContext();
   const { input, activeWordIndex } = useSelector((state) => ({
     input: state.main.input.value,
     activeWordIndex: state.main.words.activeWordIndex,
@@ -35,6 +37,8 @@ const Word = memo(({ word, wordActiveIndex }) => {
       });
 
       setClassNames(newClassNames);
+      const activeWordElement = charRefs.current[0].parentElement;
+      if (activeWordElement) handleWordChange(activeWordElement);
     }
   }, [activeWordIndex, input, word, wordActiveIndex, dispatch]);
 
