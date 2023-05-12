@@ -21,12 +21,12 @@ I recently came across the Monkey Type website and found it quite impressive. I 
 - account system integration
 - quotes
 - font family, colors,      ✔
-- add states management support (if not too lazy or too OCD for other tasks)
+- add states management support (if not too lazy or too OCD for other tasks)       ✔
 - more caret styles
-- #word move down when caret comes to a certain point
+- #word move down when caret comes to a certain point       ✔
 - inputValue can go back to fix the previous word (error only)       ✔
 - backspace things       ✔
-- hash approach
+- hash approach       ✔
 - more languages (if not too lazy)
 - restart test
 - menu modal
