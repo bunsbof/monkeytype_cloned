@@ -23,22 +23,37 @@ export const ContextProvider = ({ children }) => {
     left: 0,
     width: 0,
   });
+
   const wordsRef = useRef(null);
   const inputRef = useRef(null);
   const beamRef = useRef(null);
   const charRef = useRef(null);
+  const scrollValuesRef = useRef([]);
+
+  const addScrollValue = (value) => {
+    const scrollValues = scrollValuesRef.current;
+
+    if (
+      scrollValues.length === 0 ||
+      value > scrollValues[scrollValues.length - 1]
+    ) {
+      scrollValues.push(value);
+    }
+
+    scrollValuesRef.current = scrollValues;
+  };
 
   const handleWordWrapperFocus = () => {
     inputRef.current.focus();
   };
 
-  const handleWordChange = (activeELement) => {
-    if (!activeELement) return null; //
+  const handleWordChange = (activeElement) => {
+    if (!activeElement) return null;
 
-    const currentLetter = activeELement.childNodes[input.length];
+    const currentLetter = activeElement.childNodes[input.length];
     const previousLetter =
-      activeELement.childNodes[
-        Math.min(input.length - 1, activeELement.childNodes.length - 1)
+      activeElement.childNodes[
+        Math.min(input.length - 1, activeElement.childNodes.length - 1)
       ];
 
     const letterPosLeft =
@@ -55,17 +70,23 @@ export const ContextProvider = ({ children }) => {
       ? currentLetter.offsetTop
       : previousLetter.offsetTop;
 
-    const newTop =
-      letterPosTop -
-      4 * Misc.convertRemToPixel(1) * 0.1; /* Sneed to define Config and Misc */
+    const newTop = (letterPosTop - 4 * Misc.convertRemToPixel(1) * 0.1) + 1;
+    addScrollValue(newTop);
+    const scrollValues = scrollValuesRef.current;
+    const index = scrollValues.length - 1;
+    const storedTop = scrollValues[1];
+    const updatedTop = newTop > storedTop ? storedTop : newTop;
+    if (index <= 1) scrollValues[index] = updatedTop;
+
     let newLeft = letterPosLeft - caretWidth / 2;
 
     const newWidth =
       (currentLetter ? currentLetter.offsetWidth : previousLetter.offsetWidth) *
         0.2 +
       "px";
-    setAnimationObj({ top: newTop, left: newLeft, width: newWidth });
+    setAnimationObj({ top: updatedTop, left: newLeft, width: newWidth });
   };
+
   useEffect(() => {
     if (wordsRef.current && wordsRef.current.children[activeWordIndex]) {
       wordsRef.current.children[activeWordIndex].classList.add("active");
@@ -106,6 +127,7 @@ export const ContextProvider = ({ children }) => {
         inputRef,
         beamRef,
         charRef,
+        scrollValuesRef,
         setAnimationObj,
         setIsLanguageRightToLeft,
         handleWordWrapperFocus,

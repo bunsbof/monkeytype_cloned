@@ -54,6 +54,7 @@ const Beam = () => {
         ref={beamRef}
         className="default"
         style={{
+          position: "absolute",
           animationName: "beamAnimation",
           animationDuration: "0.3s",
           animationFillMode: "forwards",
