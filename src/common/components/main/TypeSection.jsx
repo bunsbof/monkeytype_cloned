@@ -46,7 +46,7 @@ function TypeSection() {
             height: "152px",
             overflow: "hidden",
             width: "100%",
-            paddingBottom: "100px",
+            paddingBottom: "76px",
           }}
         >
           {words?.map((word, index) => (
