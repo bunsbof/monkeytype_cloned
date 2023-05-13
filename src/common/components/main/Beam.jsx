@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { useStateContext } from "../../../contexts/ContextProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCaretWidth } from "../../../app/main/beam/beamSlice";
 
 const Beam = () => {
   const { beamRef, animationObj } = useStateContext();
   const dispatch = useDispatch();
   const animationRef = useRef(null);
+  const { input } = useSelector((state) => ({
+    input: state.main.input.value,
+  }));
+  // if (animationObj) console.log(animationObj);
 
   useEffect(() => {
     if (beamRef.current) {
@@ -55,8 +59,8 @@ const Beam = () => {
         className="default"
         style={{
           position: "absolute",
-          animationName: "beamAnimation",
-          animationDuration: "0.3s",
+          animationName: input ? "none" : "caretFlashSmooth",
+          animationDuration: "1s",
           animationFillMode: "forwards",
           fontSize: "1.5rem",
           opacity: 1,
@@ -68,21 +72,6 @@ const Beam = () => {
         }}
         onAnimationEnd={handleAnimationEnd}
       ></div>
-      {/* <div
-        id="caret"
-        ref={beamRef}
-        className="default"
-        // style="font-size: 1.5rem; animation-name: caretFlashSmooth; opacity: 1; display: block; top: 3.6px; left: 6px;"
-        style={{
-          fontSize: "1.5rem",
-          animationName: "caretFlashSmooth",
-          animationDuration: "1s", // Optionally, specify the duration of the animation
-          opacity: 1,
-          display: "block",
-          top: "0.6px",
-          left: "6px",
-        }}
-      ></div> */}
     </>
   );
 };

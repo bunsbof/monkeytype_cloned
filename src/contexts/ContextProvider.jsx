@@ -28,19 +28,23 @@ export const ContextProvider = ({ children }) => {
   const inputRef = useRef(null);
   const beamRef = useRef(null);
   const charRef = useRef(null);
+  const desiredBeamBehave = useRef([]);
   const scrollValuesRef = useRef([]);
 
   const addScrollValue = (value) => {
+    const desired = desiredBeamBehave.current;
     const scrollValues = scrollValuesRef.current;
-
     if (
       scrollValues.length === 0 ||
       value > scrollValues[scrollValues.length - 1]
-    ) {
+    )
       scrollValues.push(value);
+
+    if (desired.length === 0 || (desired.length === 1 && value > desired[0])) {
+      desired.push(value);
     }
 
-    scrollValuesRef.current = scrollValues;
+    desiredBeamBehave.current = desired.slice(-2);
   };
 
   const handleWordWrapperFocus = () => {
@@ -70,13 +74,17 @@ export const ContextProvider = ({ children }) => {
       ? currentLetter.offsetTop
       : previousLetter.offsetTop;
 
-    const newTop = (letterPosTop - 4 * Misc.convertRemToPixel(1) * 0.1) + 1;
+    const newTop = letterPosTop - 4 * Misc.convertRemToPixel(1) * 0.1 + 1;
     addScrollValue(newTop);
-    const scrollValues = scrollValuesRef.current;
-    const index = scrollValues.length - 1;
-    const storedTop = scrollValues[1];
-    const updatedTop = newTop > storedTop ? storedTop : newTop;
-    if (index <= 1) scrollValues[index] = updatedTop;
+    const desiredValue = desiredBeamBehave.current;
+    const updatedTop =
+      desiredValue[1] &&
+      newTop >= scrollValuesRef.current[scrollValuesRef.current.length - 1]
+        ? desiredValue[1]
+        : desiredValue.length >= 2 &&
+          newTop < scrollValuesRef.current[scrollValuesRef.current.length - 1]
+        ? desiredValue[0]
+        : desiredValue[0];
 
     let newLeft = letterPosLeft - caretWidth / 2;
 

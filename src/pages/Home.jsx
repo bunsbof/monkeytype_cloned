@@ -1,15 +1,10 @@
-import { FunctionMenu, TypeSection } from "../common/components";
+import { ModeMenu, TypeSection } from "../common/components";
 
 const Home = () => {
-
   return (
-    <div
-      id="middle"
-      className="wide125"
-      style={{ height: "100%" }}
-    >
+    <div id="middle" className="wide125" style={{ height: "100%" }}>
       <div className="page pageTest active" style={{ opacity: 1 }}>
-        <FunctionMenu />
+        <ModeMenu />
         <TypeSection />
       </div>
     </div>
