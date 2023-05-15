@@ -12,7 +12,7 @@ export default configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ["myAction"],
-        ignoredPaths: ["main.words.value"], // Ignore the 'words.value' path
+        ignoredPaths: ["main.words.value", "main.modes.value"], // Ignore the 'words.value' path
         serialize: serialize, // Use our custom serialize function
         deserialize: deserialize // Use our custom deserialize function
       }

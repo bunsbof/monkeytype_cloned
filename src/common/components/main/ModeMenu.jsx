@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import CustomButton from "./CustomButton";
 import {
   FaAt,
@@ -12,9 +11,8 @@ import {
   FaHeart,
   FaSearch,
 } from "../../../assets";
-// import { themeSelector } from "../../contexts/features/theme/themeSlice";
 
-const FunctionMenu = () => {
+const ModeMenu = () => {
   // const { menuColor, themeColor, mainButton, textColor } = useSelector(themeSelector);
   return (
     <div id="testConfig">
@@ -23,6 +21,11 @@ const FunctionMenu = () => {
           <div className="textButton punctuationMode">
             <FaAt /> punctuation
           </div>
+          {/* <CustomButton
+            icon={<FaAt />}
+            title="punctuation"
+            classNames="textButton punctuationMode"
+          /> */}
           <div className="textButton numbersMode">
             <FaHashtag /> numbers
           </div>
@@ -47,125 +50,55 @@ const FunctionMenu = () => {
         </div>
         <div className="spacer rightSpacer"></div>
         <div className="time hidden" style={{ opacity: 1, width: "unset" }}>
-          <div
-            className="textButton active"
-            // timeconfig="15"
-          >
+          <div className="textButton active">
             <span>15</span>
           </div>
-          <div
-            className="textButton"
-            // timeconfig="30"
-          >
+          <div className="textButton">
             <span>30</span>
           </div>
-          <div
-            className="textButton"
-            // timeconfig="60"
-          >
+          <div className="textButton">
             <span>60</span>
           </div>
-          <div
-            className="textButton"
-            // timeconfig="120"
-          >
+          <div className="textButton">
             <span>120</span>
           </div>
-          <div
-            className="textButton"
-            // timeconfig="custom"
-          >
-            {/* <i className="fas fa-fw fa-tools" style="margin-top:.1rem"></i> */}
+          <div className="textButton">
             <FaTools style={{ marginTop: ".1rem" }} />
           </div>
         </div>
-        <div
-          className="wordCount"
-          // style="opacity: 1; width: unset;"
-          style={{ opacity: 1, width: "unset" }}
-        >
-          <div
-            className="textButton active"
-            // wordcount="10"
-          >
+        <div className="wordCount" style={{ opacity: 1, width: "unset" }}>
+          <div className="textButton active">
             <span>10</span>
           </div>
-          <div
-            className="textButton"
-            //  wordcount="25"
-          >
+          <div className="textButton">
             <span>25</span>
           </div>
-          <div
-            className="textButton"
-            //  wordcount="50"
-          >
+          <div className="textButton">
             <span>50</span>
           </div>
-          <div
-            className="textButton"
-            // wordcount="100"
-          >
+          <div className="textButton">
             <span>100</span>
           </div>
-          <div
-            className="textButton"
-            //  wordcount="custom"
-          >
-            {/* <i className="fas fa-fw fa-tools" style="margin-top:.1rem"></i> */}
+          <div className="textButton">
             <FaTools style={{ marginTop: ".1rem" }} />
           </div>
         </div>
         <div className="quoteLength hidden">
-          <div
-            className="textButton"
-            // quotelength="-1"
-          >
-            all
-          </div>
-          <div
-            className="textButton"
-            // quotelength="0"
-          >
-            short
-          </div>
-          <div
-            className="textButton"
-            // quotelength="1"
-          >
-            medium
-          </div>
-          <div
-            className="textButton active"
-            //  quotelength="2"
-          >
-            long
-          </div>
-          <div
-            className="textButton"
-            //  quotelength="3"
-          >
-            thicc
-          </div>
-          <div
-            className="textButton favorite hidden"
-            // quotelength="-3"
-          >
-            {/* <i className="fas fa-heart" style="margin-top:.1rem"></i> */}
+          <div className="textButton">all</div>
+          <div className="textButton">short</div>
+          <div className="textButton">medium</div>
+          <div className="textButton active">long</div>
+          <div className="textButton">thicc</div>
+          <div className="textButton favorite hidden">
             <FaHeart style={{ marginTop: ".1rem" }} />
           </div>
-          <div
-            className="textButton"
-            // quotelength="-2"
-          >
-            {/* <i className="fas fa-search" style="margin-top:.1rem"></i> */}
+          <div className="textButton">
             <FaSearch style={{ marginTop: ".1rem" }} />
           </div>
         </div>
         <div className="zen hidden">
           <div
             className="textButton"
-            // style="width:0;padding-left:0;padding-right:0"
             style={{ width: "0", paddingLeft: "0", paddingRight: "0" }}
           >
              
@@ -173,7 +106,6 @@ const FunctionMenu = () => {
         </div>
         <div
           className="customText hidden"
-          // style="opacity: 1; width: unset;"
           style={{ opacity: 1, width: "unset" }}
         >
           <div className="textButton">change</div>
@@ -183,4 +115,4 @@ const FunctionMenu = () => {
   );
 };
 
-export default FunctionMenu;
+export default ModeMenu;
