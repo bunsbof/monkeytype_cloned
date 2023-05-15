@@ -1,4 +1,4 @@
-import CustomButton from "./CustomButton";
+import CustomButton from "../CustomButton";
 import {
   FaAt,
   FaHashtag,
@@ -10,7 +10,7 @@ import {
   FaTools,
   FaHeart,
   FaSearch,
-} from "../../../assets";
+} from "../../../../assets";
 
 const ModeMenu = () => {
   // const { menuColor, themeColor, mainButton, textColor } = useSelector(themeSelector);

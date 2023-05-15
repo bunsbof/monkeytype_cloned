@@ -1,7 +1,7 @@
-import { useStateContext } from "../../../contexts/ContextProvider";
-import Word from "./Word";
-import Beam from "./Beam";
-import Input from "./Input";
+import { useStateContext } from "../../../../contexts/ContextProvider";
+import Word from "../Word";
+import Beam from "../Beam";
+import Input from "../Input";
 import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { useStateContext } from "../../../contexts/ContextProvider";
+import { useStateContext } from "../../../../contexts/ContextProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { setCaretWidth } from "../../../app/main/beam/beamSlice";
+import { setCaretWidth } from "../../../../app/main/beam/beamSlice";
 
 const Beam = () => {
   const { beamRef, animationObj } = useStateContext();

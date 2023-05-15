@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useStateContext } from "../../../contexts/ContextProvider";
+import { useStateContext } from "../../../../contexts/ContextProvider";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetInputValue,
   setInputValue,
-} from "../../../app/main/input/inputSlice";
+} from "../../../../app/main/input/inputSlice";
 import {
   activeWordIndexDec,
   activeWordIndexInc,
   selectInputByWordIndex,
   updateWordInput,
-} from "../../../app/main/word/wordSlice";
+} from "../../../../app/main/word/wordSlice";
 
 const Input = () => {
   const { input, key, activeWordIndex } = useSelector((state) => ({

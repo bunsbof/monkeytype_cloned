@@ -1,8 +1,8 @@
 import { memo, useEffect, useRef, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setKeyValue } from "../../../app/main/input/inputSlice";
-import { selectInputByWordIndex } from "../../../app/main/word/wordSlice";
-import { useStateContext } from "../../../contexts/ContextProvider";
+import { setKeyValue } from "../../../../app/main/input/inputSlice";
+import { selectInputByWordIndex } from "../../../../app/main/word/wordSlice";
+import { useStateContext } from "../../../../contexts/ContextProvider";
 
 const Word = memo(({ word, wordActiveIndex }) => {
   const { handleWordChange } = useStateContext();
