@@ -1,4 +1,5 @@
-import CustomButton from "../CustomButton";
+import { memo, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   FaAt,
   FaHashtag,
@@ -11,9 +12,17 @@ import {
   FaHeart,
   FaSearch,
 } from "../../../../assets";
+import "./ModeMenu.css";
 
 const ModeMenu = () => {
-  // const { menuColor, themeColor, mainButton, textColor } = useSelector(themeSelector);
+  const modes = useSelector((state) => state.main.modes.value);
+  const { modeList, conditions } = useMemo(
+    () => modes.genMode("words"),
+    [modes]
+  );
+
+  console.log(modeList, conditions);
+
   return (
     <div id="testConfig">
       <div className="row">
@@ -115,4 +124,4 @@ const ModeMenu = () => {
   );
 };
 
-export default ModeMenu;
+export default memo(ModeMenu);

@@ -1,0 +1,391 @@
+.textButton {
+  align-content: center;
+  appearance: none;
+  border: none;
+  border-radius: var(--roundness);
+  color: var(--sub-color);
+  cursor: pointer;
+  display: grid;
+  font-family: inherit;
+  font-size: 1em;
+  gap: 0.25em;
+  grid-auto-flow: column;
+  height: min-content;
+  height: -moz-min-content;
+  line-height: 1.25em;
+  padding: 0.5em;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.125s, color 0.125s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: max-content;
+  width: -moz-max-content;
+}
+
+.textButton .far,
+.textButton .fas {
+  display: grid;
+  place-content: center center;
+}
+
+.textButton.active {
+  color: var(--main-color);
+}
+
+.textButton.active:hover {
+  color: var(--text-color);
+}
+
+.textButton.active:active {
+  color: var(--sub-color);
+}
+
+.textButton.disabled {
+  cursor: default;
+  opacity: 0.33;
+  pointer-events: none;
+}
+
+.textButton.disabled:hover {
+  background: var(--text-color);
+  outline: none;
+}
+
+.textButton.disabled:active {
+  background: var(--sub-color);
+  color: var(--bg-color);
+}
+
+.textButton:focus,
+.textButton:hover {
+  color: var(--text-color);
+}
+
+.textButton:focus {
+  outline: none;
+}
+
+.scrollToTopButton,
+.textButton:active {
+  color: var(--sub-color);
+}
+
+#bottom .left .textButton,
+#bottom .right .textButton {
+  transition: 0.125s;
+}
+
+#bottom .leftright .textButton {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 0;
+  text-decoration: none;
+}
+
+#bottom .leftright .left .textButton,
+#bottom .leftright .right .textButton {
+  align-items: baseline;
+  display: grid;
+  gap: 0.25rem;
+  grid-auto-flow: column;
+  width: max-content;
+  width: -moz-available;
+}
+
+#bottom.focus #newVersionIndicator,
+#bottom.focus .keyTips,
+#bottom.focus .textButton {
+  opacity: 0 !important;
+}
+
+#menu .textButton .text {
+  align-self: center;
+  font-size: 0.65em;
+  line-height: 0;
+}
+
+#menu .textButton .icon,
+#menu .textButton .loading,
+#menu .textButton .user {
+  display: grid;
+  height: 1.25em;
+  place-content: center center;
+  width: 1.25em;
+}
+
+#menu .textButton.showAlerts {
+  position: relative;
+}
+
+#menu .textButton.account {
+  align-items: center;
+  position: relative;
+}
+
+#menu .textButton.account .avatar,
+#menu .textButton.account .loading,
+#menu .textButton.account .user {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  height: 1.25em;
+  width: 1.25em;
+}
+
+#menu .textButton.account .levelAndBar {
+  transition: 0.125s;
+}
+
+#menu .textButton.account .level {
+  align-self: center;
+  background: var(--sub-color);
+  border-radius: calc(var(--roundness) / 2);
+  color: var(--bg-color);
+  font-size: 0.65em;
+  line-height: 0.65em;
+  padding: 0.4em;
+  transition: 0.125s;
+  width: max-content;
+}
+
+#menu .textButton.account .xpBar {
+  background: var(--sub-alt-color);
+  border-radius: var(--roundness);
+  bottom: -0.5em;
+  height: 0.25em;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+#menu .textButton.account .xpBar .bar {
+  background: var(--main-color);
+  border-radius: var(--roundness);
+  height: 100%;
+  left: 0;
+  width: 0;
+}
+
+#menu .textButton.account .xpBar .xpGain {
+  color: var(--main-color);
+  font-size: 0.75em;
+  left: 100%;
+  margin-left: 0.5em;
+  position: absolute;
+  top: 0.2em;
+  transform: translateY(-50%);
+}
+
+#menu .textButton.account .xpBar .xpBreakdown {
+  color: var(--text-color);
+  display: grid;
+  justify-items: center;
+  margin-top: 0.75em;
+  position: absolute;
+  width: 100%;
+}
+
+#menu .textButton.account .xpBar .xpBreakdown .text {
+  font-size: 0.75em;
+  position: absolute;
+  width: max-content;
+}
+
+#menu .textButton.account:hover .level {
+  background-color: var(--text-color);
+}
+
+#menu .separator {
+  background-color: var(--sub-color);
+  height: 1rem;
+  width: 2px;
+}
+
+#top.focus #menu .textButton.discord:after {
+  background: 0 0;
+}
+
+#top.focus #menu {
+  color: transparent !important;
+}
+
+#top.focus #menu .notificationBubble {
+  opacity: 0 !important;
+}
+
+#top.focus #menu .textButton {
+  color: transparent !important;
+}
+
+#top.focus #menu .levelAndBar,
+#top.focus #menu .textButton.account .avatar {
+  opacity: 0 !important;
+}
+
+#top .config .mobileConfig .textButton {
+  font-size: 2rem;
+  margin-right: -1rem;
+  padding: 0.5rem 1rem;
+}
+
+#top .config .desktopConfig .group .buttons .textButton {
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+  padding: 0 0.15rem;
+}
+
+#cookiePopupWrapper #cookiePopup .settings .cookie.ads label .textButton {
+  padding: 0.25em 0 0;
+  text-align: unset;
+  width: unset;
+}
+
+#apeKeysPopup .textButton {
+  justify-content: center;
+}
+
+#result #resultReplay .textButton,
+#result #resultWordsHistory .textButton {
+  margin-left: 0.5rem;
+  padding: 0;
+}
+
+#testConfig .time .textButton,
+#testConfig .wordCount .textButton {
+  line-height: 1rem;
+}
+
+#testConfig .time .textButton span,
+#testConfig .wordCount .textButton span {
+  height: 1.1em;
+}
+
+#testConfig .customText .textButton,
+#testConfig .mode .textButton,
+#testConfig .puncAndNum .textButton,
+#testConfig .quoteLength .textButton,
+#testConfig .time .textButton,
+#testConfig .wordCount .textButton,
+#testConfig .zen .textButton {
+  padding: 0.75rem 0.5rem 0.7rem;
+  transition: 0.125s;
+}
+
+#testConfig .customText .textButton:first-child,
+#testConfig .mode .textButton:first-child,
+#testConfig .puncAndNum .textButton:first-child,
+#testConfig .quoteLength .textButton:first-child,
+#testConfig .time .textButton:first-child,
+#testConfig .wordCount .textButton:first-child,
+#testConfig .zen .textButton:first-child {
+  padding: 0.75rem 0.5rem 0.7rem 1rem;
+}
+
+#testConfig .customText .textButton:last-child,
+#testConfig .mode .textButton:last-child,
+#testConfig .puncAndNum .textButton:last-child,
+#testConfig .quoteLength .textButton:last-child,
+#testConfig .time .textButton:last-child,
+#testConfig .wordCount .textButton:last-child,
+#testConfig .zen .textButton:last-child {
+  padding: 0.75rem 1rem 0.7rem 0.5rem;
+}
+
+#testConfig .customText .textButton:only-child,
+#testConfig .mode .textButton:only-child,
+#testConfig .puncAndNum .textButton:only-child,
+#testConfig .quoteLength .textButton:only-child,
+#testConfig .time .textButton:only-child,
+#testConfig .wordCount .textButton:only-child,
+#testConfig .zen .textButton:only-child {
+  padding: 0.75rem 1rem 0.7rem;
+}
+
+.pageTest #testModesNotice .textButton {
+  margin: 0 0.5rem;
+}
+
+.pageTest #testModesNotice .textButton.noInteraction {
+  pointer-events: none;
+}
+
+#testConfig .customText .textButton,
+#testConfig .mode .textButton,
+#testConfig .puncAndNum .textButton,
+#testConfig .quoteLength .textButton,
+#testConfig .time .textButton,
+#testConfig .wordCount .textButton,
+#testConfig .zen .textButton {
+  padding: 0.75rem 0.3rem 0.7rem;
+}
+
+#testConfig .customText .textButton:first-child,
+#testConfig .mode .textButton:first-child,
+#testConfig .puncAndNum .textButton:first-child,
+#testConfig .quoteLength .textButton:first-child,
+#testConfig .time .textButton:first-child,
+#testConfig .wordCount .textButton:first-child,
+#testConfig .zen .textButton:first-child {
+  padding: 0.75rem 0.3rem 0.7rem 0.6rem;
+}
+
+#testConfig .customText .textButton:last-child,
+#testConfig .mode .textButton:last-child,
+#testConfig .puncAndNum .textButton:last-child,
+#testConfig .quoteLength .textButton:last-child,
+#testConfig .time .textButton:last-child,
+#testConfig .wordCount .textButton:last-child,
+#testConfig .zen .textButton:last-child {
+  padding: 0.75rem 0.6rem 0.7rem 0.3rem;
+}
+
+#testConfig .customText .textButton:only-child,
+#testConfig .mode .textButton:only-child,
+#testConfig .puncAndNum .textButton:only-child,
+#testConfig .quoteLength .textButton:only-child,
+#testConfig .time .textButton:only-child,
+#testConfig .wordCount .textButton:only-child,
+#testConfig .zen .textButton:only-child {
+  padding: 0.75rem 0.6rem 0.7rem;
+}
+
+#testConfig .customText .textButton,
+#testConfig .customText .textButton:first-child,
+#testConfig .customText .textButton:last-child,
+#testConfig .customText .textButton:only-child,
+#testConfig .mode .textButton,
+#testConfig .mode .textButton:first-child,
+#testConfig .mode .textButton:last-child,
+#testConfig .mode .textButton:only-child,
+#testConfig .puncAndNum .textButton,
+#testConfig .puncAndNum .textButton:first-child,
+#testConfig .puncAndNum .textButton:last-child,
+#testConfig .puncAndNum .textButton:only-child,
+#testConfig .quoteLength .textButton,
+#testConfig .quoteLength .textButton:first-child,
+#testConfig .quoteLength .textButton:last-child,
+#testConfig .quoteLength .textButton:only-child,
+#testConfig .time .textButton,
+#testConfig .time .textButton:first-child,
+#testConfig .time .textButton:last-child,
+#testConfig .time .textButton:only-child,
+#testConfig .wordCount .textButton,
+#testConfig .wordCount .textButton:first-child,
+#testConfig .wordCount .textButton:last-child,
+#testConfig .wordCount .textButton:only-child,
+#testConfig .zen .textButton,
+#testConfig .zen .textButton:first-child,
+#testConfig .zen .textButton:last-child,
+#testConfig .zen .textButton:only-child {
+  padding: 0.5rem 0.75rem 0.45rem;
+}
+
+#top #menu .textButton.account > .text {
+  display: none;
+}
+
+#top #menu .textButton.account .levelAndBar {
+  font-size: 1rem;
+}

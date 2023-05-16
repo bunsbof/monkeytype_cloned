@@ -1,71 +1,98 @@
+import {
+  FaAt,
+  FaHashtag,
+  FaClock,
+  FaFont,
+  FaQuoteLeft,
+  FaMountain,
+  FaWrench,
+  FaTools,
+  FaSearch,
+} from "../assets";
+
 export class MenuModeGenerator {
   constructor() {
     this.modes = {
       conditions: {
         isShown: false,
-        punctuation: false,
-        numbers: false,
+        punctuation: { isOn: false, icon: FaAt },
+        numbers: { isOn: false, icon: FaHashtag },
       },
+      modeList: [
+        { name: "time", icon: FaClock },
+        { name: "words", icon: FaFont },
+        { name: "quotes", icon: FaQuoteLeft },
+        { name: "zen", icon: FaMountain },
+        { name: "custom", icon: FaWrench },
+      ],
+    };
+  }
 
+  genMode(modeKey) {
+    const modeDefaults = {
       time: {
-        isOn: false,
         conditions: true,
         control: {
-          type: "time",
+          defaultValue: 30,
           options: [
-            { value: 15, isOn: false },
-            { value: 30, isOn: false },
-            { value: 60, isOn: false },
-            { value: 120, isOn: false },
-            { value: "custom", isOn: false },
+            15,
+            30,
+            60,
+            120,
+            { optionMode: "custom", value: 1, icon: FaTools },
           ],
         },
       },
-
       words: {
-        isOn: false,
         conditions: true,
         control: {
-          type: "words",
+          defaultValue: "25",
           options: [
-            { value: 10, isOn: false },
-            { value: 25, isOn: false },
-            { value: 50, isOn: false },
-            { value: 100, isOn: false },
-            { value: "custom", isOn: false },
+            10,
+            25,
+            50,
+            100,
+            { optionMode: "custom", value: 1, icon: FaTools },
           ],
         },
       },
-
       quotes: {
-        isOn: false,
         conditions: false,
         control: {
-          type: "quotes",
+          defaultValue: "short",
           options: [
-            { value: "all", isOn: false },
-            { value: "short", isOn: false },
-            { value: "medium", isOn: false },
-            { value: "long", isOn: false },
-            { value: "thicc", isOn: false },
-            { value: "find", isOn: false },
+            "all",
+            "short",
+            "medium",
+            "long",
+            "thicc",
+            { optionMode: "find", value: null, icon: FaSearch },
           ],
         },
       },
-
       zen: {
-        isOn: false,
         conditions: false,
       },
-
       custom: {
-        isOn: false,
         conditions: true,
         control: {
-          type: "custom",
-          options: [{ value: "change", isOn: false }],
+          options: [
+            {
+              optionMode: "change",
+              value: "The quick brown fox jumps over the lazy dog",
+            },
+          ],
         },
       },
     };
+
+    const modeProperties = modeDefaults[modeKey];
+    const newModes = { ...this.modes, [modeKey]: modeProperties };
+
+    if (!modeProperties.conditions) {
+      delete newModes.conditions;
+    }
+
+    return newModes;
   }
 }
