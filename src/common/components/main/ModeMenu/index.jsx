@@ -70,7 +70,7 @@ const ModeMenu = () => {
               activeMode={defaultMode}
               handleClick={() =>
                 dispatch(
-                  changeMode({ key: val.name, value: configured[defaultMode] })
+                  changeMode({ key: val.name, value: configured[val.name] })
                 )
               }
             />

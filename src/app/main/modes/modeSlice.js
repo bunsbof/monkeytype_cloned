@@ -12,9 +12,12 @@ const initialState = {
   },
   currentMode: {
     defaultMode: "time",
-    defaultValue: 15,
+    defaultValue: null,
   },
 };
+
+initialState.currentMode.defaultValue =
+  initialState.config[initialState.currentMode.defaultMode];
 
 const modesSlice = createSlice({
   name: "modes",
@@ -24,10 +27,10 @@ const modesSlice = createSlice({
       const { key, value } = action.payload;
 
       state.config[key] = value;
-      state.currentMode.defaultMode = key;
-      state.currentMode.defaultValue = value;
+      state.currentMode.defaultMode = key
+      state.currentMode.defaultValue =
+        state.config[state.currentMode.defaultMode];
 
-      localStorage.setItem("currentMode", JSON.stringify(state.currentMode))
       localStorage.setItem("config", JSON.stringify(state.config));
     },
   },
