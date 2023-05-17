@@ -1,5 +1,7 @@
 import { memo, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+
+import CustomButton from "../CustomButton";
 import {
   FaAt,
   FaHashtag,
@@ -14,111 +16,91 @@ import {
 } from "../../../../assets";
 import "./ModeMenu.css";
 
+const modeList = [
+  { name: "time", icon: <FaClock /> },
+  { name: "words", icon: <FaFont /> },
+  { name: "quotes", icon: <FaQuoteLeft /> },
+  { name: "zen", icon: <FaMountain /> },
+  { name: "custom", icon: <FaWrench /> },
+];
+
 const ModeMenu = () => {
   const modes = useSelector((state) => state.main.modes.value);
-  const { modeList, conditions } = useMemo(
-    () => modes.genMode("words"),
-    [modes]
+  const [modeKey, setModeKey] = useState("words");
+  const [modeType, setModeType] = useState(null);
+  const { conditions, ...modeProps } = useMemo(
+    () => modes.genMode(modeKey),
+    [modes, modeKey]
   );
-
-  console.log(modeList, conditions);
+  console.log(conditions, modeProps[modeKey]);
 
   return (
     <div id="testConfig">
       <div className="row">
-        <div className="puncAndNum">
-          <div className="textButton punctuationMode">
-            <FaAt /> punctuation
-          </div>
-          {/* <CustomButton
-            icon={<FaAt />}
-            title="punctuation"
-            classNames="textButton punctuationMode"
-          /> */}
-          <div className="textButton numbersMode">
-            <FaHashtag /> numbers
-          </div>
-        </div>
-        <div className="spacer leftSpacer"></div>
+        {conditions && (
+          <>
+            <div className="puncAndNum">
+              {Object.entries(conditions).map(([key, value]) => {
+                if (key === "punctuation" || key === "numbers") {
+                  const { icon: Icon } = value;
+                  return (
+                    <CustomButton
+                      key={key}
+                      classNames={`textButton`}
+                      icon={<Icon />}
+                      title={key}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </div>
+            <div className="spacer leftSpacer"></div>
+          </>
+        )}
         <div className="mode">
-          <div className="textButton" mode="time">
-            <FaClock /> time
-          </div>
-          <div className="textButton active" mode="words">
-            <FaFont /> words
-          </div>
-          <div className="textButton" mode="quote">
-            <FaQuoteLeft /> quote
-          </div>
-          <div className="textButton" mode="zen">
-            <FaMountain /> zen
-          </div>
-          <div className="textButton" mode="custom">
-            <FaWrench /> custom
-          </div>
+          {modeList.map((val, idx) => (
+            <CustomButton
+              key={idx}
+              classNames="textButton"
+              icon={val.icon}
+              title={val.name}
+              activeMode={modeKey}
+            />
+          ))}
         </div>
-        <div className="spacer rightSpacer"></div>
-        <div className="time hidden" style={{ opacity: 1, width: "unset" }}>
-          <div className="textButton active">
-            <span>15</span>
-          </div>
-          <div className="textButton">
-            <span>30</span>
-          </div>
-          <div className="textButton">
-            <span>60</span>
-          </div>
-          <div className="textButton">
-            <span>120</span>
-          </div>
-          <div className="textButton">
-            <FaTools style={{ marginTop: ".1rem" }} />
-          </div>
-        </div>
-        <div className="wordCount" style={{ opacity: 1, width: "unset" }}>
-          <div className="textButton active">
-            <span>10</span>
-          </div>
-          <div className="textButton">
-            <span>25</span>
-          </div>
-          <div className="textButton">
-            <span>50</span>
-          </div>
-          <div className="textButton">
-            <span>100</span>
-          </div>
-          <div className="textButton">
-            <FaTools style={{ marginTop: ".1rem" }} />
-          </div>
-        </div>
-        <div className="quoteLength hidden">
-          <div className="textButton">all</div>
-          <div className="textButton">short</div>
-          <div className="textButton">medium</div>
-          <div className="textButton active">long</div>
-          <div className="textButton">thicc</div>
-          <div className="textButton favorite hidden">
-            <FaHeart style={{ marginTop: ".1rem" }} />
-          </div>
-          <div className="textButton">
-            <FaSearch style={{ marginTop: ".1rem" }} />
-          </div>
-        </div>
-        <div className="zen hidden">
-          <div
-            className="textButton"
-            style={{ width: "0", paddingLeft: "0", paddingRight: "0" }}
-          >
-             
-          </div>
-        </div>
-        <div
-          className="customText hidden"
-          style={{ opacity: 1, width: "unset" }}
-        >
-          <div className="textButton">change</div>
-        </div>
+        {modeProps[modeKey].control && (
+          <>
+            <div className="spacer rightSpacer"></div>
+
+            {modeProps[modeKey].name && modeProps[modeKey].control && (
+              <div
+                className={`${modeProps[modeKey].name}`}
+                style={{ opacity: 1, width: "unset" }}
+              >
+                {modeProps[modeKey].control.options.map((option, index) => (
+                  <div
+                    className={`textButton${
+                      option === modeProps[modeKey].control.defaultValue
+                        ? " active"
+                        : ""
+                    }`}
+                    key={index}
+                  >
+                    {typeof option === "number" ||
+                    typeof option === "string" ? (
+                      <span>{option}</span>
+                    ) : (
+                      <span>
+                        <option.icon style={{ marginTop: ".1rem" }} />
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

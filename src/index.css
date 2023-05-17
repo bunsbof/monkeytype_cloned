@@ -7041,7 +7041,7 @@ textarea:-webkit-autofill:hover {
 #testConfig .customText,
 #testConfig .mode,
 #testConfig .puncAndNum,
-#testConfig .quoteLength,
+#testConfig .quotesLength,
 #testConfig .time,
 #testConfig .wordCount,
 #testConfig .zen {
@@ -7051,7 +7051,7 @@ textarea:-webkit-autofill:hover {
 
 #testConfig .customText,
 #testConfig .puncAndNum,
-#testConfig .quoteLength,
+#testConfig .quotesLength,
 #testConfig .time,
 #testConfig .wordCount,
 #testConfig .zen {

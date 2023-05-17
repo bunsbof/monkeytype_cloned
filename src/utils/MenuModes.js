@@ -1,14 +1,4 @@
-import {
-  FaAt,
-  FaHashtag,
-  FaClock,
-  FaFont,
-  FaQuoteLeft,
-  FaMountain,
-  FaWrench,
-  FaTools,
-  FaSearch,
-} from "../assets";
+import { FaAt, FaHashtag, FaTools, FaSearch } from "../assets";
 
 export class MenuModeGenerator {
   constructor() {
@@ -18,19 +8,13 @@ export class MenuModeGenerator {
         punctuation: { isOn: false, icon: FaAt },
         numbers: { isOn: false, icon: FaHashtag },
       },
-      modeList: [
-        { name: "time", icon: FaClock },
-        { name: "words", icon: FaFont },
-        { name: "quotes", icon: FaQuoteLeft },
-        { name: "zen", icon: FaMountain },
-        { name: "custom", icon: FaWrench },
-      ],
     };
   }
 
   genMode(modeKey) {
     const modeDefaults = {
       time: {
+        name: "time",
         conditions: true,
         control: {
           defaultValue: 30,
@@ -44,9 +28,11 @@ export class MenuModeGenerator {
         },
       },
       words: {
+        name: "wordCount",
+
         conditions: true,
         control: {
-          defaultValue: "25",
+          defaultValue: 25,
           options: [
             10,
             25,
@@ -57,6 +43,7 @@ export class MenuModeGenerator {
         },
       },
       quotes: {
+        name: "quotesLength",
         conditions: false,
         control: {
           defaultValue: "short",
@@ -66,21 +53,20 @@ export class MenuModeGenerator {
             "medium",
             "long",
             "thicc",
-            { optionMode: "find", value: null, icon: FaSearch },
+            { optionMode: "find", value: "", icon: FaSearch },
           ],
         },
       },
       zen: {
+        name: "zen",
         conditions: false,
       },
       custom: {
+        name: "customText",
         conditions: true,
         control: {
           options: [
-            {
-              optionMode: "change",
-              value: "The quick brown fox jumps over the lazy dog",
-            },
+            "change"
           ],
         },
       },

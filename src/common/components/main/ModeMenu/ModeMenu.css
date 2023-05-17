@@ -265,7 +265,7 @@
 #testConfig .customText .textButton,
 #testConfig .mode .textButton,
 #testConfig .puncAndNum .textButton,
-#testConfig .quoteLength .textButton,
+#testConfig .quotesLength .textButton,
 #testConfig .time .textButton,
 #testConfig .wordCount .textButton,
 #testConfig .zen .textButton {
@@ -276,7 +276,7 @@
 #testConfig .customText .textButton:first-child,
 #testConfig .mode .textButton:first-child,
 #testConfig .puncAndNum .textButton:first-child,
-#testConfig .quoteLength .textButton:first-child,
+#testConfig .quotesLength .textButton:first-child,
 #testConfig .time .textButton:first-child,
 #testConfig .wordCount .textButton:first-child,
 #testConfig .zen .textButton:first-child {
@@ -286,7 +286,7 @@
 #testConfig .customText .textButton:last-child,
 #testConfig .mode .textButton:last-child,
 #testConfig .puncAndNum .textButton:last-child,
-#testConfig .quoteLength .textButton:last-child,
+#testConfig .quotesLength .textButton:last-child,
 #testConfig .time .textButton:last-child,
 #testConfig .wordCount .textButton:last-child,
 #testConfig .zen .textButton:last-child {
@@ -296,7 +296,7 @@
 #testConfig .customText .textButton:only-child,
 #testConfig .mode .textButton:only-child,
 #testConfig .puncAndNum .textButton:only-child,
-#testConfig .quoteLength .textButton:only-child,
+#testConfig .quotesLength .textButton:only-child,
 #testConfig .time .textButton:only-child,
 #testConfig .wordCount .textButton:only-child,
 #testConfig .zen .textButton:only-child {
@@ -314,7 +314,7 @@
 #testConfig .customText .textButton,
 #testConfig .mode .textButton,
 #testConfig .puncAndNum .textButton,
-#testConfig .quoteLength .textButton,
+#testConfig .quotesLength .textButton,
 #testConfig .time .textButton,
 #testConfig .wordCount .textButton,
 #testConfig .zen .textButton {
@@ -324,7 +324,7 @@
 #testConfig .customText .textButton:first-child,
 #testConfig .mode .textButton:first-child,
 #testConfig .puncAndNum .textButton:first-child,
-#testConfig .quoteLength .textButton:first-child,
+#testConfig .quotesLength .textButton:first-child,
 #testConfig .time .textButton:first-child,
 #testConfig .wordCount .textButton:first-child,
 #testConfig .zen .textButton:first-child {
@@ -334,7 +334,7 @@
 #testConfig .customText .textButton:last-child,
 #testConfig .mode .textButton:last-child,
 #testConfig .puncAndNum .textButton:last-child,
-#testConfig .quoteLength .textButton:last-child,
+#testConfig .quotesLength .textButton:last-child,
 #testConfig .time .textButton:last-child,
 #testConfig .wordCount .textButton:last-child,
 #testConfig .zen .textButton:last-child {
@@ -344,7 +344,7 @@
 #testConfig .customText .textButton:only-child,
 #testConfig .mode .textButton:only-child,
 #testConfig .puncAndNum .textButton:only-child,
-#testConfig .quoteLength .textButton:only-child,
+#testConfig .quotesLength .textButton:only-child,
 #testConfig .time .textButton:only-child,
 #testConfig .wordCount .textButton:only-child,
 #testConfig .zen .textButton:only-child {
@@ -363,10 +363,10 @@
 #testConfig .puncAndNum .textButton:first-child,
 #testConfig .puncAndNum .textButton:last-child,
 #testConfig .puncAndNum .textButton:only-child,
-#testConfig .quoteLength .textButton,
-#testConfig .quoteLength .textButton:first-child,
-#testConfig .quoteLength .textButton:last-child,
-#testConfig .quoteLength .textButton:only-child,
+#testConfig .quotesLength .textButton,
+#testConfig .quotesLength .textButton:first-child,
+#testConfig .quotesLength .textButton:last-child,
+#testConfig .quotesLength .textButton:only-child,
 #testConfig .time .textButton,
 #testConfig .time .textButton:first-child,
 #testConfig .time .textButton:last-child,
