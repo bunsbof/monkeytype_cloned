@@ -46,7 +46,7 @@ export class MenuModeGenerator {
         name: "quotesLength",
         conditions: false,
         control: {
-          defaultValue: "short",
+          defaultValue: "medium",
           options: [
             "all",
             "short",

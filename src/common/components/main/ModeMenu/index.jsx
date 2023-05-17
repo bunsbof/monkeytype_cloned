@@ -1,20 +1,16 @@
 import { memo, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomButton from "../CustomButton";
 import {
-  FaAt,
-  FaHashtag,
   FaClock,
   FaFont,
   FaQuoteLeft,
   FaMountain,
   FaWrench,
-  FaTools,
-  FaHeart,
-  FaSearch,
 } from "../../../../assets";
 import "./ModeMenu.css";
+import { changeMode } from "../../../../app/main/modes/modeSlice";
 
 const modeList = [
   { name: "time", icon: <FaClock /> },
@@ -26,13 +22,19 @@ const modeList = [
 
 const ModeMenu = () => {
   const modes = useSelector((state) => state.main.modes.value);
-  const [modeKey, setModeKey] = useState("words");
-  const [modeType, setModeType] = useState(null);
-  const { conditions, ...modeProps } = useMemo(
-    () => modes.genMode(modeKey),
-    [modes, modeKey]
+  const currentMode = useSelector((state) => state.main.modes.currentMode);
+  const configured = useSelector((state) => state.main.modes.config);
+  const dispatch = useDispatch();
+  const { defaultMode, defaultValue } = useMemo(
+    () => currentMode,
+    [currentMode]
   );
-  console.log(conditions, modeProps[modeKey]);
+  const { conditions, ...modeProps } = useMemo(
+    () => modes.genMode(defaultMode),
+    [modes, defaultMode]
+  );
+
+  console.log(defaultMode, defaultValue, configured);
 
   return (
     <div id="testConfig">
@@ -65,27 +67,33 @@ const ModeMenu = () => {
               classNames="textButton"
               icon={val.icon}
               title={val.name}
-              activeMode={modeKey}
+              activeMode={defaultMode}
+              handleClick={() =>
+                dispatch(
+                  changeMode({ key: val.name, value: configured[defaultMode] })
+                )
+              }
             />
           ))}
         </div>
-        {modeProps[modeKey].control && (
+        {modeProps[defaultMode].control && (
           <>
             <div className="spacer rightSpacer"></div>
 
-            {modeProps[modeKey].name && modeProps[modeKey].control && (
+            {modeProps[defaultMode].name && modeProps[defaultMode].control && (
               <div
-                className={`${modeProps[modeKey].name}`}
+                className={`${modeProps[defaultMode].name}`}
                 style={{ opacity: 1, width: "unset" }}
               >
-                {modeProps[modeKey].control.options.map((option, index) => (
+                {modeProps[defaultMode].control.options.map((option, index) => (
                   <div
                     className={`textButton${
-                      option === modeProps[modeKey].control.defaultValue
-                        ? " active"
-                        : ""
+                      option === defaultValue ? " active" : ""
                     }`}
                     key={index}
+                    onClick={() =>
+                      dispatch(changeMode({ key: defaultMode, value: option }))
+                    }
                   >
                     {typeof option === "number" ||
                     typeof option === "string" ? (
